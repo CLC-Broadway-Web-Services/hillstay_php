@@ -22,6 +22,8 @@ class BookingsModel extends Model
 		'payment_id',
 		'payment_status',
 		'payment_max_time',
+		'transaction_status',
+		'payment_id',
 		'notify_web',	
 		'status',
 		'status_name',

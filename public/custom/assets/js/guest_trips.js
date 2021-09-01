@@ -285,6 +285,7 @@ function makeReservationPayment(element, booking) {
     formData.append('user_email', current_user.email);
     formData.append('user_contact', current_user.phone);
     formData.append('notes', JSON.stringify(notes));
+    formData.append('booking_id', bookingData.id);
 
     console.log(Array.from(formData));
     // const formData = {}
@@ -331,10 +332,13 @@ function makeReservationPayment(element, booking) {
                         formData2.append('amount_paid', data.amount);
                         formData2.append('payment_id', transaction.razorpay_payment_id);
                         formData2.append('order_id', transaction.razorpay_order_id);
+                        formData2.append('booking_id', bookingData.id);
                     } else {
                         formData2.append('payment_done', false);
                         formData2.append('status', 'failed');
+                        formData2.append('booking_id', bookingData.id);
                         alert('There has been some error making payment.')
+                        return;
                     }
                     $.ajax({
                         method: "POST",

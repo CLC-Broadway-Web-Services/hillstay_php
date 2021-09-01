@@ -95,10 +95,6 @@ $routes->group('/', function ($routes) {
 		$routes->post('(:segment)/bookings', 'Frontend\Listing::getCurrentListingBookings/$1');
 	});
 
-	$routes->group('hosting', function ($routes) {
-		// $routes->get('(:segment)', 'Frontend\Services::singleService/$1');
-	});
-
 	$routes->group('f', function ($routes) {
 		$routes->get('/', 'Frontend\SearchController::index', ['as' => 'searchPage']);
 		$routes->get('(:segment)', 'Frontend\SearchController::index/$1', ['as' => 'searchPageList']);
@@ -107,45 +103,8 @@ $routes->group('/', function ($routes) {
 	$routes->group('stories', function ($routes) {
 		// $routes->get('(:segment)', 'Frontend\Services::singleService/$1');
 	});
-
-	$routes->group('place', function ($routes) {
-		// $routes->get('(:segment)', 'Frontend\Services::singleService/$1');
-	});
 });
 
-// $routes->group('/', function ($routes) {
-// 	$routes->get('/', 'Home::index', ['as' => 'home_page']);
-// 	$routes->get('initiatives', 'Frontend\Pages::initiatives', ['as' => 'initiatives_page']);
-// 	$routes->get('about-us', 'Frontend\Pages::aboutus', ['as' => 'about_us_page']);
-// 	$routes->match(['get', 'post'], 'contact-us', 'Frontend\Pages::contact_us', ['as' => 'contact_us_page']);
-// 	$routes->get('terms-of-use', 'Frontend\Pages::terms_of_use', ['as' => 'terms_page']);
-// 	$routes->get('privacy-policy', 'Frontend\Pages::privacy_policy', ['as' => 'privacy_page']);
-
-// 	$routes->get('clients', 'Frontend\Clients::index', ['as' => 'clients_page']);
-// 	$routes->get('client/(:segment)', 'Frontend\Clients::single/$1', ['as' => 'single_client_page']);
-
-// 	$routes->get('blogs', 'Frontend\Blogs::index', ['as' => 'blogs_page']);
-// 	$routes->get('blog/(:segment)', 'Frontend\Blogs::single/$1', ['as' => 'single_post_page']);
-
-// 	$routes->addRedirect('blog', 'blogs_page');
-// 	$routes->addRedirect('client', 'clients_page');
-// 	$routes->group('service', function ($routes) {
-// 		$routes->get('(:segment)', 'Frontend\Services::singleService/$1');
-// 		$routes->get('(:segment)/packages', 'Frontend\Services::singleServicePackages/$1');
-// 		$routes->match(['get', 'post'], '(:segment)/packages/(:num)', 'Frontend\Services::serviceSelectedPackage/$1/$2');
-// 	});
-// });
-
-
-
-// $routes->group('/', function ($routes) {
-// 	$routes->get('/', 'Home::index');
-// 	$routes->group('service', function ($routes) {
-// 		$routes->get('(:segment)', 'Frontend\Services::singleService/$1');
-// 		$routes->get('(:segment)/packages', 'Frontend\Services::singleServicePackages/$1');
-// 		$routes->match(['get', 'post'], '(:segment)/packages/(:num)', 'Frontend\Services::serviceSelectedPackage/$1/$2');
-// 	});
-// });
 
 // ADMIN ROUTES ONLY
 $routes->group('administrator', function ($routes) {
@@ -258,13 +217,6 @@ $routes->group('administrator', function ($routes) {
 		$routes->match(['get', 'post'], 'testimonials/delete/(:num)', 'Admin\Others::testimonialsDelete/$1');
 	});
 });
-
-// $routes->group('administrator', function ($routes) {
-// 	$routes->match(['get', 'post'], 'login', 'Admin\Auth::index');
-// 	$routes->match(['get', 'post'], 'logout', 'Admin\Auth::logOut');
-// 	$routes->match(['get', 'post'], 'forgetpassword', 'Admin\Auth::forgetPassword');
-// 	$routes->get('/', 'Admin\Dashboard::index', ['filter' => 'adminauth']);
-// });
 
 
 /**

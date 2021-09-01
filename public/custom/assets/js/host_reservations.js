@@ -75,6 +75,8 @@ const guestsToggleHtml = ` <div class="toggle-wrap">
                     </tr>
                 </tbody>
             </table>
+            listing-vaccination_certificate
+            listing-rtpcr_test
         </div>
     </div>`;
 
@@ -146,6 +148,19 @@ function parseBookingDataAndShowModal(data) {
             guestDetails = guestDetails.replace("listing-health_insurance", guestData.health_insurance);
         } else {
             guestDetails = guestDetails.replace("listing-health_insurance", 'No');
+        }
+        
+        if (guestData.vaccination_certificate) {
+            const vaccination_certificate = '<img src="' + guestData.vaccination_certificate + '" style="width: 100%;"/>';
+            guestDetails = guestDetails.replace("listing-vaccination_certificate", vaccination_certificate);
+        } else {
+            guestDetails = guestDetails.replace("listing-vaccination_certificate", '');
+        }
+        if (guestData.rtpcr_test) {
+            const rtpcr_test = '<img src="' + guestData.rtpcr_test + '" style="width: 100%;"/>';
+            guestDetails = guestDetails.replace("listing-rtpcr_test", rtpcr_test);
+        } else {
+            guestDetails = guestDetails.replace("listing-rtpcr_test", '');
         }
         guestsDataToPush += guestDetails;
     });

@@ -27,6 +27,8 @@ class BookingGuestModel extends Model
 		'chronic_medical_condition',
 		'on_medication',
 		'health_insurance',
+		'vaccination_certificate',
+		'rtpcr_test',
 	];
 
 	// Dates

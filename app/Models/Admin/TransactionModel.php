@@ -30,7 +30,8 @@ class TransactionModel extends Model
 		"order_id",
 		"card_id",
 		"status",
-		"other_info"
+		"other_info",
+		"booking_id"
 	];
 
 	// Dates

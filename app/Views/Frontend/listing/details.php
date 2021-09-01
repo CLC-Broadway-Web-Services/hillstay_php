@@ -681,7 +681,7 @@
 
     </div>
 </div>
-<form id="guestsData" class="zoom-anim-dialog mfp-hide customMfp">
+<form id="guestsData" class="zoom-anim-dialog mfp-hide customMfp" enctype="multipart/form-data">
 
     <div class="modal-body" id="_bookingFormGuestData">
         <input type="number" name="user_id" value="<?= $user_id ?>" hidden>
@@ -691,52 +691,6 @@
         <div class="col-md-12">
             <div class="style-2" id="guestsAccordion">
 
-                <!-- <div class="toggle-wrap">
-                    <span class="trigger "><a href="#">First Toggle<i class="sl sl-icon-plus"></i></a></span>
-                    <div class="toggle-container">
-                        <div class="personalGuestsDetails">
-                            <input class="guestName" id="guestname_{{i+1}}" placeholder="Guest Name" name="name" type="text">
-                            <input class="guestAge" id="guestage_{{i+1}}" placeholder="Age" name="age" type="number" min="1" max="99">
-                            <select id="guestgender_{{i+1}}" formControlName="gender">
-                                <option disabled selected>Gender</option>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
-                            </select>
-                        </div>
-                        <label>
-                            <h4>Medical Data</h4>
-                        </label>
-                        <div formGroupName="medical_condition" class="checkboxes in-row margin-bottom-20">
-                            <div>
-                                <input id="flusymptoms_{{i+1}}" type="checkbox" formControlName="flu_symptoms">
-                                <label for="flusymptoms_{{i+1}}">
-                                    Do you have any of the following flu like symptoms?<br>
-                                    <small>(ex: Fever, Cough, Sore Throat, Runny Nose, Shortness of Breath
-                                        etc...)</small>
-                                </label>
-                            </div>
-                            <input class="guestName" id="guestname_{{i+1}}" placeholder="Guest Name" name="name" type="text">
-                            <div>
-                                <input id="chronicmedicalcondition_{{i+1}}" type="checkbox" formControlName="chronic_medical_condition">
-                                <label for="chronicmedicalcondition_{{i+1}}">
-                                    Do you have any chronic medical condition
-                                    such as diabetes, hypertension, cancer, immune compromising disorder?
-                                </label>
-                            </div>
-                            <input class="guestName" id="guestname_{{i+1}}" placeholder="Guest Name" name="name" type="text">
-                            <div>
-                                <input id="onmedication_{{i+1}}" type="checkbox" formControlName="on_medication">
-                                <label for="onmedication_{{i+1}}">Are you currently on any medication?</label>
-                            </div>
-                            <input class="guestName" id="guestname_{{i+1}}" placeholder="Guest Name" name="name" type="text">
-                            <div>
-                                <input id="healthinsurance_{{i+1}}" type="checkbox" formControlName="health_insurance">
-                                <label for="healthinsurance_{{i+1}}">Guest have health insurance?</label>
-                            </div>
-                            <input class="guestName" id="guestname_{{i+1}}" placeholder="Guest Name" name="name" type="text">
-                        </div>
-                    </div>
-                </div> -->
             </div>
         </div>
     </div>
@@ -903,45 +857,6 @@
     .listing-titlebar {
         padding-bottom: 30px !important;
     }
-
-    /* Tooltip container */
-    /* .customtooltip {
-        position: relative;
-        display: inline-block;
-    } */
-
-    /* Tooltip text */
-    /* .customtooltip .tooltiptext {
-        visibility: hidden;
-        min-width: 120px;
-        background-color: #555555;
-        color: #fff !important;
-        text-align: center;
-        padding: 10px 0;
-        border-radius: 6px;
-        position: absolute;
-        z-index: 1;
-        bottom: 100%;
-        left: 50%;
-        margin-left: -60px;
-    } */
-
-    /* .customtooltip .tooltiptext::after {
-        content: " ";
-        position: absolute;
-        top: 100%;
-        left: 50%;
-        margin-left: -5px;
-        border-width: 5px;
-        border-style: solid;
-        border-color: #555555 transparent transparent transparent;
-    } */
-
-    /* Show the tooltip text when you mouse over the tooltip container */
-    /* .customtooltip:hover .tooltiptext {
-        visibility: visible;
-    } */
-
     .price-breakdown {
         border: none;
         border-radius: 5px;
@@ -1104,6 +1019,9 @@
 
     a.readMoreLink:hover {
         color: blue;
+    }
+    .form-control {
+        height: auto;
     }
 </style>
 

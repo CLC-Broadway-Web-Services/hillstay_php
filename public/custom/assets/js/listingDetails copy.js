@@ -11,6 +11,8 @@ const _bookingForm = $('#_bookingForm');
 var dataForForm = '';
 
 // breakdown modal
+// breakdown modal
+
 function openBreakDown(modalName) {
     $('#pricingBreakdownModal').addClass('show');
 }
@@ -190,6 +192,12 @@ function gettingSettingPrices() {
     // Main panel
     // showPriceBreakdownPanel
 
+    // (discountedPriceNight*totalNights)+cleaingFee+
+    // service fee calculate here
+    // ((((discountedPriceNight*totalNights)+cleaingFee)/100)*serviceFee)+
+    // lodging tax calculate here
+    // ((((discountedPriceNight*totalNights)+cleaingFee)/100)*lodgingTax)
+
     const totalNights = parseInt(totalDaysSelected);
     let weekMonthDiscount = 0;
     let discountPerNight = 0;
@@ -349,61 +357,52 @@ function addGuests(totalGuests) {
     console.log(totalGuests)
 
     for (i = 0; i < totalGuests; i++) {
-        const ICON = getHtmlPlainElement('i', '', [], ['sl', 'sl-icon-plus']);
+        var DIV = document.createElement('div');
+        DIV.classList.add('toggle-wrap');
 
-        const ANCHOR = getHtmlPlainElement('a', 'Guest ' + (i + 1), [ICON], [], [{ name: 'href', value: '#' }]);
+        var SPAN = document.createElement('span');
+        SPAN.classList.add('trigger');
+        SPAN.id = 'trigger' + i;
 
-        const SPAN = getHtmlPlainElement('span', '', [ANCHOR], ['trigger'], [{ name: 'id', value: 'trigger' + i }], [])
+        var ANCHOR = document.createElement('a');
+        ANCHOR.href = '#';
+        ANCHOR.innerHTML = 'Guest ' + (i + 1);
 
-        const guestNameClasses = ['guestName'];
-        const guestNameAttr = [
-            {
-                name: 'placeholder',
-                value: 'Guest ' + (i + 1) + ' Name'
-            },
-            {
-                name: 'name',
-                value: "guest[" + i + "]['name']"
-            },
-            {
-                name: 'type',
-                value: 'text'
-            },
-            {
-                name: 'required',
-                value: true
-            }
-        ];
-        const INPUT01 = getInput('guestname_' + i, guestNameAttr, guestNameClasses);
+        var ICON = document.createElement('i');
+        ICON.classList.add('sl');
+        ICON.classList.add('sl-icon-plus');
 
-        const guestAgeClasses = ['guestAge'];
-        const guestAgeAttr = [
-            {
-                name: 'placeholder',
-                value: 'Age'
-            },
-            {
-                name: 'name',
-                value: "guest[" + i + "]['age']"
-            },
-            {
-                name: 'type',
-                value: 'number'
-            },
-            {
-                name: 'required',
-                value: true
-            },
-            {
-                name: 'min',
-                value: '1'
-            },
-            {
-                name: 'max',
-                value: '99'
-            }
-        ];
-        const INPUT02 = getInput('guestage_' + i, guestAgeAttr, guestAgeClasses);
+        ANCHOR.appendChild(ICON);
+        SPAN.appendChild(ANCHOR);
+
+        var DIV2 = document.createElement('div');
+        if (totalGuests > 1) {
+            DIV2.classList.add('toggle-container');
+        }
+        DIV2.id = 'toggle-container' + i;
+
+        var DIV01 = document.createElement('div');
+        DIV01.classList.add('personalGuestsDetails');
+
+        var INPUT01 = document.createElement('input');
+        INPUT01.classList.add('guestName');
+        INPUT01.id = 'guestname_' + i;
+        INPUT01.placeholder = 'Guest ' + (i + 1) + ' Name';
+        INPUT01.setAttribute('name', "guest[" + i + "]['name']");
+        INPUT01.setAttribute('type', 'text');
+        INPUT01.setAttribute('required', 'required');
+        DIV01.appendChild(INPUT01);
+
+        var INPUT02 = document.createElement('input');
+        INPUT02.classList.add('guestAge');
+        INPUT02.id = 'guestage_' + i;
+        INPUT02.placeholder = 'Age';
+        INPUT02.setAttribute('name', "guest[" + i + "]['age']");
+        INPUT02.setAttribute('type', 'number');
+        INPUT02.setAttribute('required', 'required');
+        INPUT02.setAttribute('min', '1');
+        INPUT02.setAttribute('max', '99');
+        DIV01.appendChild(INPUT02);
 
         const genderOptions = [
             {
@@ -415,57 +414,99 @@ function addGuests(totalGuests) {
                 name: 'Female'
             }
         ];
-        const genderAttr = [
-            {
-                name: 'id',
-                value: 'select_gender_' + i
-            },
-            {
-                name: 'name',
-                value: "guest[" + i + "]['gender']"
-            },
-            {
-                name: 'required',
-                value: true
-            }
-        ];
-        const GENDERSELECT = getSelect(genderOptions, 'Gender', genderAttr, []);
+        const GENDERSELECT = getSelectInput(i, 'gender', genderOptions, true, 'Gender');
+        DIV01.appendChild(GENDERSELECT);
 
-        const LABEL1 = getLabel('heading', '<h4>Medical Data</h4>');
+        DIV2.appendChild(DIV01);
 
-        // Covid certification
-        const VACCINATION = getInput('vaccination_' + i, [{ name: 'type', value: 'checkbox' }], ['guest_input_']);
-        const VACCINATION_LABEL = getLabel('vaccination_' + i, 'Vaccination certificate (1st and 2nd Dose)');
-        const DIVVACCINATION = getHtmlPlainElement('div', '', [VACCINATION, VACCINATION_LABEL]);
-        const VACCINATION_HIDDEN = getInput('vaccination_' + i + 'guest', [{ name: 'type', value: 'file' }, { name: 'name', value: "guest_" + i + "_vaccination_certificate" }], ['guest_input_', 'form-control'], [{ name: 'display', value: 'none' }]);
+        // var LABEL1 = document.createElement('label');
+        var LABEL1 = getLabel('heading', '<h4>Medical Data</h4>');
+        // var H41 = document.createElement('h4');
+        // H41.innerHTML = 'Medical Data';
+        // LABEL1.appendChild(H41);
 
-        // Covid certification
-        const RTPCR = getInput('rtpcr_' + i, [{ name: 'type', value: 'checkbox' }], ['guest_input_']);
-        const RTPCR_LABEL = getLabel('rtpcr_' + i, 'RTPCR');
-        const DIVRTPCR = getHtmlPlainElement('div', '', [RTPCR, RTPCR_LABEL]);
-        const RTPCR_HIDDEN = getInput('rtpcr_' + i + 'guest', [{ name: 'type', value: 'file' }, { name: 'name', value: "guest_" + i + "_rtpcr_certificate" }], ['guest_input_', 'form-control'], [{ name: 'display', value: 'none' }]);
+        DIV2.appendChild(LABEL1);
 
         // medical Condition div
-        const INPUT11 = getInput('flusymptoms_' + i, [{ name: 'type', value: 'checkbox' }], ['guest_input_']);
-        const LABEL11 = getLabel('flusymptoms_' + i, 'Do you have any of the following flu like symptoms?<br> <small>(ex: Fever, Cough, Sore Throat, Runny Nose, Shortness of Breath etc...)</small>');
-        const DIV001 = getHtmlPlainElement('div', '', [INPUT11, LABEL11]);
+        var DIVMC = document.createElement('div');
+        DIVMC.classList.add('checkboxes');
+        DIVMC.classList.add('in-row');
+        DIVMC.classList.add('margin-bottom-20');
 
-        const INPUT001 = getInput('flusymptoms_' + i + 'guest', [{ name: 'placeholder', value: 'Write flu symptoms' }, { name: 'name', value: "guest[" + i + "]['flu_symptoms']" }], ['guest_input_'], [{ name: 'display', value: 'none' }]);
+        var DIV001 = document.createElement('div');
+        var INPUT11 = document.createElement('input');
+        INPUT11.setAttribute('type', 'checkbox');
+        INPUT11.id = 'flusymptoms_' + i;
+        INPUT11.classList.add('guest_flusymptoms_');
+        var LABEL11 = document.createElement('label');
+        LABEL11.setAttribute('for', 'flusymptoms_' + i);
+        LABEL11.innerHTML = 'Do you have any of the following flu like symptoms?<br>'
+        var SMALL11 = document.createElement('small');
+        LABEL11.innerHTML = '(ex: Fever, Cough, Sore Throat, Runny Nose, Shortness of Breath etc...)';
+        LABEL11.appendChild(SMALL11);
+        DIV001.appendChild(INPUT11);
+        DIV001.appendChild(LABEL11);
+
+        var INPUT001 = document.createElement('input');
+        INPUT001.id = 'flusymptoms_' + i + 'guest';
+        INPUT001.placeholder = 'Write flu symptoms';
+        INPUT001.setAttribute('name', "guest[" + i + "]['flu_symptoms']");
+        INPUT001.style.display = 'none';
 
         // medical conition data
-        const INPUT12 = getInput('chronicmedicalcondition_' + i, [{ name: 'type', value: 'checkbox' }], ['guest_input_']);
-        const LABEL12 = getLabel('chronicmedicalcondition_' + i, 'Do you have any chronic medical condition?<br>such as diabetes, hypertension, cancer, immune compromising disorder?')
-        const DIV002 = getHtmlPlainElement('div', '', [INPUT12, LABEL12]);
+        var DIV002 = document.createElement('div');
+        var INPUT12 = document.createElement('input');
+        INPUT12.setAttribute('type', 'checkbox');
+        INPUT12.id = 'chronicmedicalcondition_' + i;
+        INPUT12.classList.add('guest_chronicmedicalcondition_');
+        var LABEL12 = document.createElement('label');
+        LABEL12.setAttribute('for', 'chronicmedicalcondition_' + i);
+        LABEL12.innerHTML = 'Do you have any chronic medical condition?<br>such as diabetes, hypertension, cancer, immune compromising disorder?';
+        DIV002.appendChild(INPUT12);
+        DIV002.appendChild(LABEL12);
 
-        const INPUT002 = getInput('chronicmedicalcondition_' + i + 'guest', [{ name: 'placeholder', value: 'Write chronic edical condition' }, { name: 'name', value: "guest[" + i + "]['chronic_medical_condition']" }], ['guest_input_'], [{ name: 'display', value: 'none' }]);
 
-        const INPUT13 = getInput('onmedication_' + i, [{ name: 'type', value: 'checkbox' }], ['guest_input_']);
-        const LABEL13 = getLabel('onmedication_' + i, 'Are you currently on any medication?');
-        const DIV003 = getHtmlPlainElement('div', '', [INPUT13, LABEL13]);
+        var INPUT002 = document.createElement('input');
+        INPUT002.id = 'chronicmedicalcondition_' + i + 'guest';
+        INPUT002.placeholder = 'Write chronic edical condition';
+        INPUT002.setAttribute('name', "guest[" + i + "]['chronic_medical_condition']");
+        INPUT002.style.display = 'none';
 
-        const INPUT003 = getInput('onmedication_' + i + 'guest', [{ name: 'placeholder', value: 'Write medication' }, { name: 'name', value: "guest[" + i + "]['on_medication']" }], ['guest_input_'], [{ name: 'display', value: 'none' }]);
 
-        const LABEL14 = getLabel('healthinsurance_' + i, 'Guest have health insurance?');
+        var DIV003 = document.createElement('div');
+        var INPUT13 = document.createElement('input');
+        INPUT13.setAttribute('type', 'checkbox');
+        INPUT13.id = 'onmedication_' + i;
+        INPUT13.classList.add('guest_onmedication_');
+        var LABEL13 = document.createElement('label');
+        LABEL13.setAttribute('for', 'onmedication_' + i);
+        LABEL13.innerHTML = 'Are you currently on any medication?';
+        DIV003.appendChild(INPUT13);
+        DIV003.appendChild(LABEL13);
+
+
+        var INPUT003 = document.createElement('input');
+        INPUT003.id = 'onmedication_' + i + 'guest';
+        INPUT003.placeholder = 'Write medication';
+        INPUT003.setAttribute('name', "guest[" + i + "]['on_medication']");
+        INPUT003.style.display = 'none';
+
+
+        // var DIV004 = document.createElement('div');
+        // var INPUT14 = document.createElement('input');
+        // INPUT14.setAttribute('type', 'checkbox');
+        // INPUT14.id = 'healthinsurance_' + i;
+        // INPUT14.classList.add('guest_healthinsurance_');
+        // var LABEL14 = document.createElement('label');
+        // LABEL14.setAttribute('for', 'healthinsurance_' + i);
+        // LABEL14.innerHTML = 'Guest have health insurance?';
+        // DIV004.appendChild(INPUT14);
+        // DIV004.appendChild(LABEL14);
+
+
+        var LABEL14 = document.createElement('label');
+        LABEL14.setAttribute('for', 'healthinsurance_' + i);
+        LABEL14.innerHTML = 'Guest have health insurance?';
         const insuranceOptions = [
             {
                 value: 'Yes',
@@ -476,33 +517,28 @@ function addGuests(totalGuests) {
                 name: 'No'
             }
         ];
-        const insuranceAttr = [
-            {
-                name: 'id',
-                value: 'select_insurance_' + i
-            },
-            {
-                name: 'name',
-                value: "guest[" + i + "]['health_insurance']"
-            },
-            {
-                name: 'required',
-                value: true
-            }
-        ];
-        const INSURANCESELECT = getSelect(insuranceOptions, 'Select', insuranceAttr, []);
+        const INSURANCESELECT = getSelectInput(i, 'health_insurance', insuranceOptions, true);
 
-        const DIVMC = getHtmlPlainElement('div', '', [DIVVACCINATION, VACCINATION_HIDDEN, DIVRTPCR, RTPCR_HIDDEN, DIV001, INPUT001, DIV002, INPUT002, DIV003, INPUT003], ['checkboxes', 'in-row', 'margin-bottom-20']);
+        // var INPUT004 = document.createElement('input');
+        // INPUT004.id = 'healthinsurance_' + i + 'guest';
+        // INPUT004.placeholder = 'Write health insurance details';
+        // INPUT004.setAttribute('name', "guest[" + i + "]['health_insurance']");
+        // INPUT004.style.display = 'none';
 
-        const DIV01 = getHtmlPlainElement('div', '', [INPUT01, INPUT02, GENDERSELECT], ['personalGuestsDetails']);
+        DIVMC.appendChild(DIV001);
+        DIVMC.appendChild(INPUT001);
+        DIVMC.appendChild(DIV002);
+        DIVMC.appendChild(INPUT002);
+        DIVMC.appendChild(DIV003);
+        DIVMC.appendChild(INPUT003);
+        // DIVMC.appendChild(DIV004);
+        // DIVMC.appendChild(INPUT004);
 
-        var DIV2CLASSES = [];
-        if (totalGuests > 1) {
-            DIV2CLASSES = ['toggle-container'];
-        }
-        const DIV2 = getHtmlPlainElement('div', '', [DIV01, LABEL1, DIVMC, LABEL14, INSURANCESELECT], DIV2CLASSES, [{ name: 'id', value: 'toggle-container' + i }]);
-
-        const DIV = getHtmlPlainElement('div', '', [SPAN, DIV2]);
+        DIV2.appendChild(DIVMC);
+        DIV2.appendChild(LABEL14);
+        DIV2.appendChild(INSURANCESELECT);
+        DIV.appendChild(SPAN);
+        DIV.appendChild(DIV2);
 
         guestsAccordion.appendChild(DIV)
     }
@@ -510,79 +546,68 @@ function addGuests(totalGuests) {
     initiateGuestFunctions();
 }
 
-function getHtmlPlainElement(element, innerhtml = '', appendedItems = [], classes = [], attributes = [], styles = []) {
-    var HTMLELEMENT = document.createElement(element);
-    if (innerhtml) {
-        HTMLELEMENT.innerHTML = innerhtml;
-    }
-    classes.forEach((cls) => {
-        HTMLELEMENT.classList.add(cls);
-    })
-    appendedItems.forEach((items) => {
-        HTMLELEMENT.appendChild(items);
-    })
-    attributes.forEach((attr) => {
-        HTMLELEMENT.setAttribute(attr.name, attr.value);
-    })
-    if (styles.length > 0) {
-        var styleNow = '';
-        styles.forEach((stl) => {
-            styleNow += stl.name + ':' + stl.value + ';'
-        })
-        HTMLELEMENT.setAttribute('style', styleNow);
-    }
-    return HTMLELEMENT;
-}
 function getLabel(labelfor, labeltext, index = '') {
     var LABEL = document.createElement('label');
     LABEL.setAttribute('for', labelfor + index);
     LABEL.innerHTML = labeltext;
     return LABEL;
 }
-function getInput(id, attributes, classes = [], styles = []) {
-    var INPUT = document.createElement('input');
-    classes.forEach((cls) => {
-        INPUT.classList.add(cls);
-    })
-    INPUT.id = id;
-    attributes.forEach((attr) => {
-        INPUT.setAttribute(attr.name, attr.value);
-    })
-    if (styles.length > 0) {
-        var styleNow = '';
-        styles.forEach((stl) => {
-            styleNow += stl.name + ':' + stl.value + ';'
-        })
-        INPUT.setAttribute('style', styleNow);
-    }
-    return INPUT;
-}
-function getSelect(options, defaultOption, attributes, classes) {
-    var SELECT = document.createElement('select');
-    classes.forEach((cls) => {
-        SELECT.classList.add(cls);
-    })
-    attributes.forEach((attr) => {
-        SELECT.setAttribute(attr.name, attr.value);
-    })
+function getSelectInput(index, name, options, required = false, defaultOption = 'select') {
+    var SELECT01 = document.createElement('select');
+    SELECT01.id = 'select_' + name + '_' + index;
+    SELECT01.setAttribute('name', "guest[" + index + "]['" + name + "']");
+    SELECT01.setAttribute('required', required);
 
-    var OPTION = document.createElement('option');
-    OPTION.setAttribute('value', '');
-    OPTION.innerText = defaultOption;
-    SELECT.appendChild(OPTION);
+    var OPTION1 = document.createElement('option');
+    OPTION1.setAttribute('value', '');
+    OPTION1.innerText = defaultOption;
+    SELECT01.appendChild(OPTION1);
 
     options.forEach((option) => {
         var OPTION2 = document.createElement('option');
         OPTION2.setAttribute('value', option.value);
         OPTION2.innerText = option.name;
-        SELECT.appendChild(OPTION2);
+        SELECT01.appendChild(OPTION2);
     })
 
-    return SELECT;
+    return SELECT01;
 }
 
 function initiateGuestFunctions() {
-    $('.guest_input_').change(function () {
+    $('.guest_flusymptoms_').change(function () {
+        console.log(this.id)
+        if (this.checked) {
+            $('#' + this.id + 'guest').show();
+            $('#' + this.id + 'guest').attr('required', 'required');
+        } else {
+            $('#' + this.id + 'guest').hide();
+            $('#' + this.id + 'guest').val('');
+            $('#' + this.id + 'guest').removeAttr('required');
+        }
+    });
+    $('.guest_chronicmedicalcondition_').change(function () {
+        console.log(this.id)
+        if (this.checked) {
+            $('#' + this.id + 'guest').show();
+            $('#' + this.id + 'guest').attr('required', 'required');
+        } else {
+            $('#' + this.id + 'guest').hide();
+            $('#' + this.id + 'guest').val('');
+            $('#' + this.id + 'guest').removeAttr('required');
+        }
+    });
+    $('.guest_healthinsurance_').change(function () {
+        console.log(this.id)
+        if (this.checked) {
+            $('#' + this.id + 'guest').show();
+            $('#' + this.id + 'guest').attr('required', 'required');
+        } else {
+            $('#' + this.id + 'guest').hide();
+            $('#' + this.id + 'guest').val('');
+            $('#' + this.id + 'guest').removeAttr('required');
+        }
+    });
+    $('.guest_onmedication_').change(function () {
         console.log(this.id)
         if (this.checked) {
             $('#' + this.id + 'guest').show();
@@ -595,6 +620,8 @@ function initiateGuestFunctions() {
     });
 }
 
+// var formData = new FormData(_bookingForm[0]);
+
 // open guest form for booking request
 function openGuestsForm() {
 }
@@ -605,14 +632,17 @@ guestForm.submit(function (event) {
     event.preventDefault();
 
     var formData = new FormData(guestForm[0]);
-
+    // var formData2 = new FormData(_bookingForm[0]);
     var formData2 = _bookingForm.serializeArray();
+
+    // console.log(Array.from(formData),Array.from(formData2));
 
     formData2.forEach(function (fields) {
         formData.append(fields.name, fields.value);
     });
     formData.append('dataForForm', JSON.stringify(dataForForm));
 
+    // formData.append('booking',formData2)
     console.log(Array.from(formData));
 
     $.ajax(window.location.href, {
@@ -620,7 +650,6 @@ guestForm.submit(function (event) {
         data: formData,
         processData: false,
         contentType: false,
-        cache: false,
     }).done(function (response) {
         // if get error show error and stop loader.
         // else show success message and stop loader

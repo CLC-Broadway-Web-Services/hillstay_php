@@ -53,6 +53,8 @@ class Auth extends BaseController
 
                         $this->data = [
                             'isUserLoggedIn' => true,
+                            'uid' =>$userData['uid'],
+                            'lastLogin' =>$userData['lastLogin']
                         ];
                         session()->set($this->data);
 
@@ -71,6 +73,7 @@ class Auth extends BaseController
 
                         $this->data = [
                             'isUserLoggedIn' => true,
+                            'uid' =>$userData['uid']
                         ];
                         session()->set($this->data);
 
@@ -95,6 +98,8 @@ class Auth extends BaseController
 
                     $this->data = [
                         'isUserLoggedIn' => true,
+                        'uid' =>$userData['uid'],
+                        'lastLogin' =>$userData['lastLogin']
                     ];
                     session()->set($this->data);
 
@@ -131,6 +136,8 @@ class Auth extends BaseController
 
                     $this->data = [
                         'isUserLoggedIn' => true,
+                        'uid' =>$userData['uid'],
+                        'lastLogin' =>$userData['lastLogin']
                     ];
                     session()->set($this->data);
 
@@ -325,6 +332,8 @@ class Auth extends BaseController
     public function setUserMethod($user)
     {
         $user['isUserLoggedIn'] = true;
+        $user['lastLogin'] = $user['lastLogin'];
+        $this->userMd->set('lastLogin', 'NOW()', FALSE)->update($user['uid']);
         // $this->data = [
         //     'user' => $user,
         //     'isUserLoggedIn' => true,

@@ -36,6 +36,8 @@ class Reservations extends Controller
 	public function index()
 	{
 		$host_id = $this->data['user_id'];
+		
+		$this->data['lastLogin'] = $this->session->get('lastLogin');
 		$getParam = '';
 		if ($this->request->getMethod() == 'get' && $this->request->getVar('type')) {
 			$getParam = $this->request->getGet('type');
@@ -51,7 +53,7 @@ class Reservations extends Controller
 				$bookings_data = $this->bookings_m->where(['host_id' => $host_id])->findAll();
 			}
 		} else {
-			$bookings_data = $this->bookings_m->where(['host_id' => $host_id])->findAll();
+			$bookings_data = $this->bookings_m->where(['host_id' => $host_id])->orderBy('id', 'desc')->findAll();
 		}
 		foreach ($bookings_data as $key => $booking) {
 			$decoded = json_decode($booking['price_breakdown']);

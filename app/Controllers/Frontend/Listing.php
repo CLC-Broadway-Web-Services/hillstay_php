@@ -41,19 +41,18 @@ class Listing extends Controller
 	}
 	public function index($listing_id = null)
 	{
+		helper('file');
 		$decodedId = base64_decode(base64_decode(base64_decode($listing_id)));
 		$booking_m = new BookingsModel();
 
 		if ($this->request->getMethod() == 'post') {
-			// $guests = [];
-			// foreach ($this->request->getPost('guest') as $guest) {
-			// 	$guests[] = $guest;
-			// }
-			// return json_encode($guests);
+
 			$dataForForm = array();
 			foreach (json_decode($this->request->getPost('dataForForm')) as $key => $data) {
 				$dataForForm[$key] = $data;
 			}
+			// $thisData = array_merge($_POST, $dataForForm);
+			// return json_encode($thisData);
 
 			$bookingDate = explode(" ", $this->request->getPost('bookingdate'));
 
@@ -92,13 +91,26 @@ class Listing extends Controller
 			// then show thank you for booking request
 			$booking_guest_m = new BookingGuestModel();
 			// $guests = [];
-			foreach ($this->request->getPost('guest') as $guest) {
-				// $guest = json_encode($guest);
-				// $guest = json_decode($guest);
-				// $guest = json_encode($guest);
-				// $guests[] = $guest;
-				// $gest = $guest;
-				// $thisGuest
+			foreach ($this->request->getPost('guest') as $key => $guest) {
+				// image uploading here
+				$uploadFolder = 'public/data/guest/';
+				$imageDoseName = 'guest_' . $key . '_vaccination_certificate';
+				if ($img = $this->request->getFile($imageDoseName)) {
+					if ($img->isValid() && !$img->hasMoved()) {
+						$newName = $img->getRandomName();
+						$img->move($uploadFolder . $bookingId . '/vaccination/', $newName);
+						$gest['vaccination_certificate'] = $uploadFolder . $bookingId . '/vaccination/' . $newName;
+					}
+				}
+				$imageRtpcrName = 'guest_' . $key . '_rtpcr_certificate';
+				if ($img = $this->request->getFile($imageRtpcrName)) {
+					if ($img->isValid() && !$img->hasMoved()) {
+						$newName = $img->getRandomName();
+						$img->move($uploadFolder . $bookingId . '/rtpcr/', $newName);
+						$gest['rtpcr_test'] = $uploadFolder . $bookingId . '/rtpcr/' . $newName;
+					}
+				}
+
 				$gest['name'] = $guest["'name'"];
 				// return json_encode($gest);
 				$gest['age'] = $guest["'age'"];

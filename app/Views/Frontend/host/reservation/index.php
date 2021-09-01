@@ -8,11 +8,11 @@
                 <div class="sort-by">
                     <div class="sort-by-select">
                         <select class="select2" id="resevationSelectionDropdown">
-                            <option <?php if(isset($_GET['type']) && $_GET['type'] == 'new') echo 'selected' ?> value="new">New Requests</option>
-                            <option <?php if(isset($_GET['type']) && $_GET['type'] == 'completed') echo 'selected' ?> value="completed">Completed Bookings</option>
-                            <option <?php if(isset($_GET['type']) && $_GET['type'] == 'approved') echo 'selected' ?> value="approved">Approved Bookings</option>
-                            <option <?php if(isset($_GET['type']) && $_GET['type'] == 'rejected') echo 'selected' ?> value="rejected">Rejected requests</option>
-                            <option <?php if(!isset($_GET['type']) || $_GET['type'] == '') echo 'selected' ?> value="all">All Requests</option>
+                            <option <?php if (isset($_GET['type']) && $_GET['type'] == 'new') echo 'selected' ?> value="new">New Requests</option>
+                            <option <?php if (isset($_GET['type']) && $_GET['type'] == 'completed') echo 'selected' ?> value="completed">Completed Bookings</option>
+                            <option <?php if (isset($_GET['type']) && $_GET['type'] == 'approved') echo 'selected' ?> value="approved">Approved Bookings</option>
+                            <option <?php if (isset($_GET['type']) && $_GET['type'] == 'rejected') echo 'selected' ?> value="rejected">Rejected requests</option>
+                            <option <?php if (!isset($_GET['type']) || $_GET['type'] == '') echo 'selected' ?> value="all">All Requests</option>
                         </select>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                 <tbody class="bg-white">
                     <?php foreach ($bookings_data as $booking) : ?>
                         <div id="booking_data_<?= $booking['id'] ?>" style="display:none;"><?= json_encode($booking) ?></div>
-                        <tr>
+                        <tr class="<?= $lastLogin < $booking['created_at'] || $lastLogin < $booking['created_at'] ? 'bg-warning' : '' ?>">
                             <td><?= ucfirst($booking['status_name']) ?></td>
                             <td><?= $booking['guests'] ?> Guest\s</td>
                             <td><?= date('M d, Y', strtotime($booking['check_in'])) ?> / <?= date('M d, Y', strtotime($booking['check_out'])) ?></td>
@@ -188,7 +188,7 @@
             <div class="modal-footer" id="reservationDetailsFooter">
                 <button type="button" class="btn btn-warning btn-sm" onclick="chatGuest()">Chat Guest</button>
                 <button type="button" class="btn btn-success btn-sm" onclick="approveRequest()">Approve</button>
-                <button type="button" class="btn btn-danger btn-sm"onclick="rejectRequest()">Reject</button>
+                <button type="button" class="btn btn-danger btn-sm" onclick="rejectRequest()">Reject</button>
             </div>
         </div>
     </div>

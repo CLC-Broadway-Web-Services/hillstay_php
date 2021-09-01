@@ -77,6 +77,7 @@ class Transactions extends Controller
 				$order_data['user_email'] = $input['user_email'];
 				$order_data['user_contact'] = $input['user_contact'];
 				$order_data['notes'] = $input['notes'];
+				$order_data['booking_id'] = $input['booking_id'];
 				$order_data['order_created_at'] = $razorpayOrder['created_at'];
 				$createOrderLocally = $this->transaction_m->save($order_data);
 				if ($createOrderLocally) {
@@ -91,17 +92,27 @@ class Transactions extends Controller
 
 		// them make payment
 		if (isset($input['payment_done'])) {
+			$orderId = $input['order_id'];
+			$thisTransaction = $this->transaction_m->where('order_id', $orderId)->first();
 			// update transaction
-			$orderId = $input['payment_id'];
 			$order_data['status'] = $input['status'];
+			$bookingData['transaction_status'] = $input['status'];
 			if (isset($input['amount_paid'])) {
 				$order_data['amount_paid'] = $input['amount_paid'];
 			}
 			if (isset($input['payment_id'])) {
 				$order_data['payment_id'] = $input['payment_id'];
+				$bookingData['transaction_id'] = intval($thisTransaction['id']);
+				$bookingData['payment_id'] = $input['payment_id'];
+				$bookingData['payment_status'] = 1;
+				$bookingData['status_name'] = 'completed';
+				$bookingData['completed'] = 1;
 			}
-			$createOrderLocally = $this->transaction_m->where('order_id', $orderId)->save($order_data);
-			if ($createOrderLocally) {
+
+			$updateLocalOrder = $this->transaction_m->set($order_data)->update($thisTransaction['id']);
+			$changesBookings = $this->bookings_m->set($bookingData)->update($input['booking_id']);
+			// make changes in booking table
+			if ($updateLocalOrder && $changesBookings) {
 				return json_encode(['success' => true]);
 			} else {
 				return json_encode(['success' => false]);
