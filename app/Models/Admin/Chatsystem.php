@@ -48,15 +48,15 @@ class Chatsystem extends Model
 	// protected $cleanValidationRules = true;
 
 	// Callbacks
-	// protected $allowCallbacks       = true;
-	// protected $beforeInsert         = [];
-	// protected $afterInsert          = [];
-	// protected $beforeUpdate         = [];
-	// protected $afterUpdate          = [];
-	// protected $beforeFind           = [];
-	// protected $afterFind            = [];
-	// protected $beforeDelete         = [];
-	// protected $afterDelete          = [];
+	protected $allowCallbacks       = true;
+	protected $beforeInsert         = [];
+	protected $afterInsert          = ['callAfterInsert'];
+	protected $beforeUpdate         = [];
+	protected $afterUpdate          = [];
+	protected $beforeFind           = [];
+	protected $afterFind            = [];
+	protected $beforeDelete         = [];
+	protected $afterDelete          = [];
 
 	public function insertChat($payload)
 	{
@@ -65,10 +65,21 @@ class Chatsystem extends Model
 		$inboxDb = new InboxModel();
 		// $data = ['total_chats' => '`total_chats` + 1', 'id' => $inboxId];
 		// return $data;
-		$inboxDb->set('total_chats', 'total_chats+1', false)->where('id', $inboxId);
+		$inboxDb->set('total_chats', 'total_chats+1', false)->update($inboxId);
 		return $inboxDb->update();
 		// $inboxDb->where('id', $inboxId);
 		// $inboxDb->set('total_chats', 'total_chats+1');
 		// $inboxDb->update('users');
 	}
+	protected function callAfterInsert(array $data)
+    {
+		$chatData = $this->find($data['id']);
+		$inboxId = $chatData['inbox'];
+		$inbox_m = new InboxModel();
+		$query = $inbox_m->set('total_chats', 'total_chats+1', false)->update($inboxId);
+      
+        // log_message("info", "Running method after insert");
+
+        return $query;
+    }
 }

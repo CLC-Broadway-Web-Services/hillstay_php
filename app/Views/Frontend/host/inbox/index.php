@@ -104,10 +104,10 @@
                             </div>
                             <!-- Reply Area -->
                             <div class="clearfix"></div>
-                            <div class="message-reply">
-                                <textarea cols="40" rows="3" placeholder="Your Message"></textarea>
-                                <button class="button">Send Message</button>
-                            </div>
+                            <form class="message-reply" id="message-reply" method="post">
+                                <textarea cols="40" rows="3" name="message" placeholder="Your Message"></textarea>
+                                <button class="button" type="submit">Send Message</button>
+                            </form>
                         <?php else : ?>
                             <div id="messagesContainer">
                                 <div class="message-text">

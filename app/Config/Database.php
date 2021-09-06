@@ -84,7 +84,7 @@ class Database extends \CodeIgniter\Database\Config
 		'hostname' => 'localhost',
 		'username' => 'admin',
 		'password' => '23988725',
-		'database' => 'hillstay',
+		'database' => 'broadway_hillstay',
 		'DBDriver' => 'MySQLi',
 		'DBPrefix' => '',
 		'pConnect' => false,

@@ -58,4 +58,16 @@ class InboxModel extends Model
 		}
 		return $inboxes;
 	}
+	public function getAllGuestInboxes()
+	{
+		$userid = session()->get('uid');
+		$inboxes = $this->where(['guest_id' => $userid])->orderBy('updated_at', 'desc')->findAll();
+		foreach ($inboxes as $key => $inbox) {
+			$user_m = new UserModel();
+			$userData = $user_m->select('photoURL')->find($inbox['host_id']);
+			$inboxes[$key]['host_image'] = $userData['photoURL'];
+			$inboxes[$key]['host_id_64'] = base64_encode(base64_encode(base64_encode($inbox['host_id'])));
+		}
+		return $inboxes;
+	}
 }

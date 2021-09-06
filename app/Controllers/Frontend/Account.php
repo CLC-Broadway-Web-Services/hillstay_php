@@ -4,6 +4,7 @@ namespace App\Controllers\Frontend;
 
 use App\Models\Admin\BookingGuestModel;
 use App\Models\Admin\BookingsModel;
+use App\Models\Admin\Chatsystem;
 use App\Models\Admin\InboxModel;
 use App\Models\Admin\ListingModel;
 use App\Models\Admin\UsermedicalModel;
@@ -18,6 +19,7 @@ class Account extends Controller
 	private $bookings_m;
 	private $booking_guests_m;
 	private $inbox_m;
+	private $chat_m;
 	private $user_m;
 	private $session;
 	private $razorpay;
@@ -36,7 +38,7 @@ class Account extends Controller
 			'aboutuser' => $this->session->get('aboutuser'),
 			'emailVerified' => $this->session->get('emailVerified'),
 			'phone' => $this->session->get('phone'),
-			'phoneVerified' => $this->session->get('phoneVerified'),			
+			'phoneVerified' => $this->session->get('phoneVerified'),
 			'photoURL' => $this->session->get('photoURL'),
 			'govID' => $this->session->get('govID'),
 			'govIDverified' => $this->session->get('govIDverified'),
@@ -53,8 +55,12 @@ class Account extends Controller
 		$this->bookings_m = new BookingsModel();
 		$this->booking_guests_m = new BookingGuestModel();
 		$this->inbox_m = new InboxModel();
+		$this->chat_m = new Chatsystem();
 		$this->user_m = new UserModel();
+		$this->data['time'] = new Time;
 		helper('file');
+		helper('number');
+		helper('form');
 	}
 	public function account_profile()
 	{
@@ -74,13 +80,64 @@ class Account extends Controller
 
 		return view('Frontend/account/profile', $this->data);
 	}
-	public function account_inbox()
+	public function account_inbox($hostId = null)
 	{
 		$this->data['pageJS'] = '<script>
 		const body = document.getElementsByTagName("body")[0];
 		body.classList.remove("transparent-header");</script>';
 
-		return view('Frontend/account/index', $this->data);
+		if ($hostId == null) {
+			$inboxes = $this->inbox_m->getAllGuestInboxes();
+			$this->data['inboxes'] = $inboxes;
+		} else {
+			$inboxes = $this->inbox_m->getAllGuestInboxes();
+			$this->data['inboxes'] = $inboxes;
+			$HOSTID = base64_decode(base64_decode(base64_decode($hostId)));
+			$this->data['current_host'] = $hostId;
+			$inbox = $this->inbox_m->where(['guest_id' => $this->data['user_data']['id'], 'host_id' => $HOSTID])->first();
+			$HOST = $this->user_m->getGuestDetails($HOSTID);
+			if (!$inbox) {
+				$newInboxData = [
+					'guest_id' =>  $this->data['user_data']['id'],
+					'guest_name' =>  $this->data['user_data']['id'] . ' ' . $this->data['user_data']['id'],
+					'host_id' => $HOSTID,
+					'host_name' => $HOST['firstName'] . ' ' . $HOST['lastname']
+				];
+				$lastId = $this->inbox_m->insertID($this->inbox_m->save($newInboxData));
+				$inbox = $this->inbox_m->find($lastId);
+			}
+			$this->data['inbox'] = $inbox;
+			$this->data['host'] = $HOST;
+			// $chats = $this->chat_m->where(['userid' => $inbox["guest_id"], 'hostid' => $inbox["host_id"]])->orderBy('created_at', 'asc')->findAll();
+			$chats = $this->chat_m->where(['inbox' => $inbox["id"]])->orderBy('mid', 'asc')->findAll();
+			$this->data['chats'] = $chats;
+			$bookings = $this->bookings_m->where(['user_id' => $inbox["guest_id"], 'host_id' => $inbox["host_id"]])->orderBy('created_at', 'desc')->findAll();
+			$this->data['bookings'] = $bookings;
+			$lastBooking = null;
+			if ($this->request->getMethod() == 'post' && $this->request->getVar('message')) {
+				$chatMessage = $this->request->getVar('message', FILTER_SANITIZE_STRIPPED);
+				$chatData = [
+					'inbox' => $inbox['id'],
+					'userid' =>  $this->data['user_data']['id'],
+					'userName' =>  $this->data['user_data']['id'] . ' ' . $this->data['user_data']['id'],
+					'hostid' => $HOST['uid'],
+					'hostName' => $HOST['firstName'] . ' ' . $HOST['lastname'],
+					'message' => $chatMessage,
+					'messagebyuser' => 1,
+					'notifyUserWeb' => 1,
+				];
+				$this->chat_m->save($chatData);
+				return redirect()->route('account_inbox_chat', [$hostId]);
+			}
+
+			if (count($bookings) > 0) {
+				$lastBooking = $bookings[0];
+			}
+			$this->data['lastBooking'] = $lastBooking;
+			$this->data['chatBox'] = true;
+		}
+
+		return view('Frontend/account/inbox', $this->data);
 	}
 	public function account_alerts()
 	{

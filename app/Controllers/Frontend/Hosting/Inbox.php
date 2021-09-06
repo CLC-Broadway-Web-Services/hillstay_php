@@ -73,6 +73,25 @@ class Inbox extends Controller
 		$bookings = $this->bookings_m->where(['user_id' => $inbox["guest_id"], 'host_id' => $inbox["host_id"]])->orderBy('created_at', 'desc')->findAll();
 		$this->data['bookings'] = $bookings;
 		$lastBooking = null;
+		if ($this->request->getMethod() == 'post' && $this->request->getVar('message')) {
+			$chatMessage = $this->request->getVar('message', FILTER_SANITIZE_STRIPPED);
+			$chatData = [
+				'inbox' => $inbox['id'],
+				'userid' => $guest['uid'],
+				'userName' => $guest['firstName'] . ' ' . $guest['lastname'],
+				'hostid' => $this->data['user_id'],
+				'hostName' => $this->data['user_name'],
+				'message' => $chatMessage,
+				'messagebyuser' => 0,
+				'notifyUserWeb' => 1,
+			];
+			$this->chat_m->save($chatData);
+			return redirect()->route('hosting_inbox_chat', [$guestid]);
+			// echo '<pre>';
+			// print_r($chatData);
+			// echo '</pre>';
+			// return;
+		}
 
 		if (count($bookings) > 0) {
 			$lastBooking = $bookings[0];
