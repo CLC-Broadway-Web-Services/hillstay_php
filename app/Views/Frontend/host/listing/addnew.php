@@ -1214,7 +1214,7 @@
                                         <label for="cleaning_fee">Do you want to add Cleaning fee?</label>
                                     </div>
                                 </div>
-                                <div id="showCleaningFee" hidden>
+                                <div id="showCleaningFee" style="display:none;">
                                     <label>This will be your cleaning fee.</label>
                                     <input type="number" name="cleaning_fee" id="cleaning_fee_input" placeholder="Cleaning Fee">
                                 </div>

@@ -79,12 +79,12 @@ $routes->group('/', function ($routes) {
 
 		$routes->group('listing', function ($routes) {
 			$routes->match(['get', 'post'], 'addnew', 'Frontend\Hosting\Listing::add_new', ['as' => 'hosting_listing_add_new']);
-			$routes->match(['get', 'post'], 'edit/(:num)', 'Frontend\Hosting\Listing::add_new', ['as' => 'hosting_listing_edit']);
+			$routes->match(['get', 'post'], 'edit/(:num)', 'Frontend\Hosting\Listing::editListing/$1', ['as' => 'hosting_listing_edit']);
 			$routes->match(['get', 'post'], '(:num)', 'Frontend\Hosting\Listing::listing/$id', ['as' => 'hosting_listing_listing']);
 		});
 		$routes->group('listings', function ($routes) {
 			$routes->match(['get', 'post'], '/', 'Frontend\Hosting\Listing::index', ['as' => 'hosting_listings_all']);
-			$routes->match(['get', 'post'], 'edit/(:num)', 'Frontend\Hosting\Listing::edit/$1', ['as' => 'hosting_listing_edit']);
+			// $routes->match(['get', 'post'], 'edit/(:num)', 'Frontend\Hosting\Listing::edit/$1', ['as' => 'hosting_listing_edit']);
 			$routes->match(['get', 'post'], 'preview/(:num)', 'Frontend\Hosting\Listing::preview/$1', ['as' => 'hosting_listing_preview']);
 		});
 	});
@@ -118,6 +118,8 @@ $routes->group('administrator', function ($routes) {
 		$routes->match(['get', 'post'], '/', 'Admin\ListingController::index', ['as' => 'admin_all_listing']);
 		$routes->match(['get', 'post'], 'add', 'Admin\ListingController::save', ['as' => 'admin_save_listing']);
 		$routes->match(['get', 'post'], 'edit/(:num)', 'Admin\ListingController::save/$1', ['as' => 'admin_update_listing']);
+		$routes->match(['get', 'post'], 'show/(:num)', 'Admin\ListingController::show/$1', ['as' => 'admin_view_listing']);
+		$routes->match(['get', 'post'], 'delete/(:num)', 'Admin\ListingController::delete/$1', ['as' => 'admin_delete_listing']);
 		$routes->match(['get', 'post'], 'status/(:num)', 'Admin\ListingController::activate/$1', ['as' => 'admin_activate_listing']);
 		$routes->match(['get', 'post'], 'reject/(:num)', 'Admin\ListingController::reject/$1', ['as' => 'admin_reject_listing']);
 		$routes->match(['get', 'post'], 'homestatus/(:num)', 'Admin\ListingController::homeStatus/$1', ['as' => 'admin_home_show']);

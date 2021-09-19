@@ -26,6 +26,7 @@
                         <th scope="col">Acomodation</th>
                         <th scope="col">Location</th>
                         <th scope="col">Updated</th>
+                        <th scope="col">Published</th>
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
@@ -66,6 +67,9 @@
                                 <?php } else { 
                                     echo 'Not Activated';
                                 } ?>
+                            </td>
+                            <td>
+                                <a href="<?= route_to('hosting_listing_edit', $listing['listing_id']) ?>" style="font-size:25px;" type="button"><i class="im im-icon-Edit"></i></a>
                             </td>
                         </tr>
                     <?php endforeach; ?>

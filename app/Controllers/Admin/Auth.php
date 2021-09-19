@@ -86,7 +86,7 @@ class Auth extends BaseController
             $data = $admin->forgetPassword($email);
             if ($data['response'] == 'success') {
                 $data['successMessage'] = session()->getFlashdata('successMessage');
-                return redirect()->to('/administrator/forgetpassword?resetcode='.$email);
+                return redirect()->to('/administrator/forgetpassword?resetcode=' . $email);
             } else {
                 $data['errorMessage'] = session()->getFlashdata('errorMessage');
             }

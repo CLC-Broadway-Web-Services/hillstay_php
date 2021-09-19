@@ -537,6 +537,9 @@ class Listing extends Controller
 		$this->data['leafletScripts'] = true;
 		return view('Frontend/host/listing/addnew', $this->data);
 	}
+	public function editListing($listing_id) {
+		return view('Frontend/host/listing/editListing', $this->data);
+	}
 	private function saveStep1($data)
 	{
 		// return json_encode($data);
@@ -593,8 +596,8 @@ class Listing extends Controller
 		$lastid = intval($data['listing_id']);
 
 		$data2 = [
-			'listing_id' => $data['listing_id'],
-			'bedrooms' => $data['bedrooms'],
+			'listing_id' => intval($data['listing_id']),
+			'bedrooms' => intval($data['bedrooms']),
 		];
 
 		$totalbeds = $data['sleepbeds_x'];
@@ -608,40 +611,41 @@ class Listing extends Controller
 		$floormat_x = $data['floormat_x'];
 
 		foreach ($totalbeds as $key => $value) {
-			$data_sleep[$key]['total_beds'] = $value;
+			$data_sleep[$key]['total_beds'] = intval($value);
 		}
 		foreach ($double_x as $key => $value) {
-			$data_sleep[$key]['double_bed'] = $value;
+			$data_sleep[$key]['double_bed'] = intval($value);
 		}
 		foreach ($king_x as $key => $value) {
-			$data_sleep[$key]['king_bed'] = $value;
+			$data_sleep[$key]['king_bed'] = intval($value);
 		}
 		foreach ($queen_x as $key => $value) {
-			$data_sleep[$key]['queen_bed'] = $value;
+			$data_sleep[$key]['queen_bed'] = intval($value);
 		}
 		foreach ($single_x as $key => $value) {
-			$data_sleep[$key]['single_bed'] = $value;
+			$data_sleep[$key]['single_bed'] = intval($value);
 		}
 		foreach ($floormat_x as $key => $value) {
-			$data_sleep[$key]['floormat_bed'] = $value;
+			$data_sleep[$key]['floormat_bed'] = intval($value);
 		}
 		foreach ($sofabed_x as $key => $value) {
-			$data_sleep[$key]['sofa_bed'] = $value;
+			$data_sleep[$key]['sofa_bed'] = intval($value);
 		}
 		foreach ($bunkbed_x as $key => $value) {
-			$data_sleep[$key]['bunk_bed'] = $value;
+			$data_sleep[$key]['bunk_bed'] = intval($value);
 		}
 		foreach ($hammock_x as $key => $value) {
-			$data_sleep[$key]['hammock_bed'] = $value;
+			$data_sleep[$key]['hammock_bed'] = intval($value);
 		}
 
 		foreach ($data_sleep as $sleep_beds_data) {
-			$sleep_beds_data['user_id'] = $data['user_id'];
+			$sleep_beds_data['user_id'] = intval($data['user_id']);
 			$sleep_beds_data['listing_id'] = $lastid;
-			$query = $this->listing_sleep_m->save($data);
+			$query = $this->listing_sleep_m->save($sleep_beds_data);
 		}
 
 		// return json_encode($data2);
+		// return json_encode($data_sleep);
 
 		$query = $this->listing_m->save($data2);
 
@@ -833,7 +837,7 @@ class Listing extends Controller
 				$data[$key] = intval(1);
 			}
 		}
-		if ($data['additoinal_rules']) {
+		if (isset($data['additoinal_rules'])) {
 			$adtionalRules = $data['additoinal_rules'];
 			foreach ($adtionalRules as $key => $rule) {
 				$thisrule = [
@@ -973,6 +977,7 @@ class Listing extends Controller
 		}
 		unset($data['mode']);
 		unset($data['user_id']);
+		$data['finished'] = 1;
 		// return json_encode($data);
 		$query = $this->listing_m->save($data);
 		$this->session->set(['last_id'  => $lastid]);
