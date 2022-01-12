@@ -9,11 +9,11 @@ use App\Models\Admin\ListingModel;
 use App\Models\Admin\TransactionModel;
 use App\Models\Admin\UserModel;
 use App\Models\Globals\FunctionsModel;
-use CodeIgniter\Controller;
+
 use CodeIgniter\I18n\Time;
 use Razorpay\Api\Api;
 
-class Transactions extends Controller
+class Transactions extends BaseController
 {
 	private $data;
 	private $listing_m;
@@ -21,7 +21,6 @@ class Transactions extends Controller
 	private $booking_guests_m;
 	private $inbox_m;
 	private $user_m;
-	private $session;
 	private $transaction_m;
 	private $functions;
 	private $razorpay;
@@ -29,10 +28,9 @@ class Transactions extends Controller
 	public function __construct()
 	{
 		$this->data = array();
-		$this->session = session();
 		$this->data['pageJS'] = '<script>const body = document.getElementsByTagName("body")[0];body.classList.remove("transparent-header");</script>';
-		$this->data['user_name'] = $this->session->get('firstName');
-		$this->data['user_id'] = $this->session->get('uid');
+		$this->data['user_name'] = session()->get('firstName');
+		$this->data['user_id'] = session()->get('uid');
 		$this->data['razorKey'] = env('razorKey');
 		$this->listing_m = new ListingModel();
 		$this->bookings_m = new BookingsModel();

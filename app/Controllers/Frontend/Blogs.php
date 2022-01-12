@@ -2,12 +2,10 @@
 
 namespace App\Controllers\Frontend;
 
+use App\Controllers\BaseController;
 use App\Models\Admin\BlogsModel;
-use CodeIgniter\Controller;
 
-use App\Models\Admin\TestimonialsModel;
-
-class Blogs extends Controller
+class Blogs extends BaseController
 {
 	public function index()
 	{

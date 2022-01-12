@@ -36,20 +36,15 @@ function insertImageToView(image, index) {
     DIV2.classList.add('inputsDiv');
     DIV2.classList.add('mt-3');
 
-    // <input name="caption[0]" placeholder="image captions here" style="margin-bottom:0;">
     var INPUTCAPTION = document.createElement("INPUT");
     INPUTCAPTION.setAttribute("type", "text");
     INPUTCAPTION.classList.add('mb-0');
     INPUTCAPTION.setAttribute("name", "caption[" + i + "]");
     INPUTCAPTION.setAttribute("placeholder", "image captions here");
 
-    // <div class="checkboxes in-row">
     var DIV3 = document.createElement("div");
     DIV3.classList.add('checkboxes');
     DIV3.classList.add('in-row');
-
-    // <input id="checkbox0" type="radio" name="cover" value="0" class="captionsCheckbox">
-    // <label for="checkbox0">for Cover image</label>
 
     var INPUTCOVER = document.createElement("INPUT");
     INPUTCOVER.setAttribute("type", "radio");
@@ -79,8 +74,6 @@ function insertImageToView(image, index) {
     DIV1.appendChild(DIV2);
 
     listing_gallery.appendChild(DIV1);
-    // listing_gallery.removeAttribute('hidden');
-
     console.log(galleryImagesToChoose);
 }
 

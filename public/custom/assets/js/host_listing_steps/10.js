@@ -1,6 +1,7 @@
 if ($('.tinymce')) {
     tinymce.init({
         selector: '.tinymce',
+        branding: false,
         init_instance_callback: function (editor) {
             editor.on("Change", function (e) {
                 tinyMCE.triggerSave();

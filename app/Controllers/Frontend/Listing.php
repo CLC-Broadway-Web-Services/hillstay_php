@@ -10,9 +10,9 @@ use App\Models\Admin\ListingModel;
 use App\Models\Admin\ListingSleepingArrangementModel;
 use App\Models\Admin\UserModel;
 use App\Models\Admin\BookingsModel;
-use CodeIgniter\Controller;
+use App\Controllers\BaseController;
 
-class Listing extends Controller
+class Listing extends BaseController
 {
 	private $data;
 	private $listing_m;
@@ -20,17 +20,15 @@ class Listing extends Controller
 	private $listing_sleep_m;
 	private $listing_gallery_m;
 	private $listing_aditional_rules_m;
-	private $session;
 
 	public function __construct()
 	{
-		$this->session = session();
 		$this->data = array();
 		$this->data['user_name'] = null;
 		$this->data['user_id'] = null;
-		if ($this->session->get('isUserLoggedIn')) {
-			$this->data['user_name'] = $this->session->get('firstName');
-			$this->data['user_id'] = $this->session->get('uid');
+		if (session()->get('isUserLoggedIn')) {
+			$this->data['user_name'] = session()->get('firstName');
+			$this->data['user_id'] = session()->get('uid');
 		}
 		$this->listing_m = new ListingModel();
 		$this->listing_sleep_m = new ListingSleepingArrangementModel();
@@ -409,7 +407,7 @@ class Listing extends Controller
 			$dataToSave['listing_id'] = $request->getVar('listing_id');
 			$dataToSave['message'] = $request->getVar('message');
 			$dataToSave['userid'] = $this->data['user_id'];
-			$dataToSave['userName'] = $this->session->get('firstName') . ' ' . $this->session->get('lastname');
+			$dataToSave['userName'] = session()->get('firstName') . ' ' . session()->get('lastname');
 			$dataToSave['messagebyuser'] = '1';
 			$dataToSave['listing_name'] = $request->getVar('listing_name');
 

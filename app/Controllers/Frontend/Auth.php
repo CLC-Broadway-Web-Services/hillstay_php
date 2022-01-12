@@ -4,6 +4,7 @@ namespace App\Controllers\Frontend;
 
 use App\Controllers\BaseController;
 use App\Models\Admin\UserModel;
+use App\Models\Globals\UserVerificationModel;
 use App\Models\Admin\UserverifyModel;
 
 class Auth extends BaseController
@@ -20,7 +21,7 @@ class Auth extends BaseController
     }
     public function login()
     {
-        if(session()->get('isUserLoggedIn')) {
+        if (session()->get('isUserLoggedIn')) {
             return redirect('account_profile');
         }
         $client = new \Google_Client();
@@ -48,17 +49,17 @@ class Auth extends BaseController
                 if ($this->userMd->checkEmailExist($googleEmail)) {
                     if ($this->userMd->checkGoogleExist($g_oauth_id)) {
                         $userData = $this->userMd->where('email', $googleEmail)->first();
-                        unset($userData['usr_password']);
-                        session()->set($userData);
+                        // unset($userData['usr_password']);
+                        // session()->set($userData);
 
-                        $this->data = [
-                            'isUserLoggedIn' => true,
-                            'uid' =>$userData['uid'],
-                            'lastLogin' =>$userData['lastLogin']
-                        ];
-                        session()->set($this->data);
+                        // $this->data = [
+                        //     'isUserLoggedIn' => true,
+                        //     'uid' => $userData['uid'],
+                        //     'lastLogin' => $userData['lastLogin']
+                        // ];
+                        // session()->set($this->data);
 
-                        $this->setUserMethod($this->data);
+                        $this->setUserMethod($userData);
                         return redirect('account_profile');
                     } else {
 
@@ -68,16 +69,16 @@ class Auth extends BaseController
                         ];
                         $update = $this->userMd->set($data2)->where(['email' => $googleEmail])->update();
                         $userData = $this->userMd->where(['email' => $googleEmail])->first();
-                        unset($userData['usr_password']);
-                        session()->set($userData);
+                        // unset($userData['usr_password']);
+                        // session()->set($userData);
 
-                        $this->data = [
-                            'isUserLoggedIn' => true,
-                            'uid' =>$userData['uid']
-                        ];
-                        session()->set($this->data);
+                        // $this->data = [
+                        //     'isUserLoggedIn' => true,
+                        //     'uid' => $userData['uid']
+                        // ];
+                        // session()->set($this->data);
 
-                        $this->setUserMethod($this->data);
+                        $this->userMd->setUserMethod($userData);
                         return redirect('account_profile');
                     }
                 } else {
@@ -93,17 +94,17 @@ class Auth extends BaseController
                     $registerUser = $this->userMd->insertId($this->userMd->insert($google_data));
 
                     $userData = $this->userMd->find($registerUser);
-                    unset($userData['usr_password']);
-                    session()->set($userData);
+                    // unset($userData['usr_password']);
+                    // session()->set($userData);
 
-                    $this->data = [
-                        'isUserLoggedIn' => true,
-                        'uid' =>$userData['uid'],
-                        'lastLogin' =>$userData['lastLogin']
-                    ];
-                    session()->set($this->data);
+                    // $this->data = [
+                    //     'isUserLoggedIn' => true,
+                    //     'uid' => $userData['uid'],
+                    //     'lastLogin' => $userData['lastLogin']
+                    // ];
+                    // session()->set($this->data);
 
-                    $this->setUserMethod($this->data);
+                    $this->userMd->setUserMethod($userData);
                     return redirect('account_profile');
                     //create user here
                 }
@@ -114,7 +115,7 @@ class Auth extends BaseController
             // return print_r($_POST);
 
             $currentUrl = null;
-            if($this->request->getPost('currentUrl')) {
+            if ($this->request->getPost('currentUrl')) {
                 $currentUrl = $this->request->getPost('currentUrl');
             };
 
@@ -131,17 +132,17 @@ class Auth extends BaseController
                         'value' => 'Credentials not matched.'
                     );
                 } else {
-                    unset($userData['usr_password']);
-                    session()->set($userData);
+                    // unset($userData['usr_password']);
+                    // session()->set($userData);
 
-                    $this->data = [
-                        'isUserLoggedIn' => true,
-                        'uid' =>$userData['uid'],
-                        'lastLogin' =>$userData['lastLogin']
-                    ];
-                    session()->set($this->data);
+                    // $this->data = [
+                    //     'isUserLoggedIn' => true,
+                    //     'uid' => $userData['uid'],
+                    //     'lastLogin' => $userData['lastLogin']
+                    // ];
+                    // session()->set($this->data);
 
-                    $this->setUserMethod($this->data);
+                    $this->userMd->setUserMethod($userData);
                     // return redirect()->to('/account/profile');
                     // if($currentUrl !== null) {
                     //     return redirect()->to('/'.$currentUrl);
@@ -187,15 +188,15 @@ class Auth extends BaseController
                         'value' => 'Credentials not matched.'
                     );
                 } else {
-                    unset($userData['usr_password']);
-                    session()->set($userData);
+                    // unset($userData['usr_password']);
+                    // session()->set($userData);
 
-                    $this->data = [
-                        'isUserLoggedIn' => true,
-                    ];
-                    session()->set($this->data);
+                    // $this->data = [
+                    //     'isUserLoggedIn' => true,
+                    // ];
+                    // session()->set($this->data);
 
-                    $this->setUserMethod($this->data);
+                    $this->userMd->setUserMethod($userData);
                     // return redirect()->to('/account/profile');
                     return redirect('account_profile');
                 }
@@ -250,6 +251,8 @@ class Auth extends BaseController
                     $registerUser = $this->userMd->insertId($this->userMd->insert($userData));
 
                     if ($registerUser) {
+                        $verifyData = new UserVerificationModel();
+                        $verifyData->save(['user_id' => $registerUser]);
                         $userData['uid'] = $registerUser;
                         if ($this->sendVerificationEmail($userData)) {
                             $this->data['response'] =  array(
@@ -307,7 +310,10 @@ class Auth extends BaseController
 
         $verifyCode = rand(1000000, 9999999);
 
-        $message = 'Your verification code is ' . $verifyCode;
+        $verifyLink = route_to('verify_user_email');
+        $verifyLink = base_url() . $verifyLink . '?uid=' . $userData['uid'] . '&code=' . $verifyCode;
+        // $message = '<p>Your verification code is ' . $verifyCode . '</p><p>Click below link to verify your email</p>';
+        $message = '<p>Click below link to verify your email<br><a href="' . $verifyLink . '">' . $verifyLink . '</a></p>';
 
         $verifyData = [
             'uid' => $userData['uid'],
@@ -328,81 +334,63 @@ class Auth extends BaseController
         $email->setMessage($message);
 
         return $email->send();
-    }
-    public function setUserMethod($user)
-    {
-        $user['isUserLoggedIn'] = true;
-        $user['lastLogin'] = $user['lastLogin'];
-        $this->userMd->set('lastLogin', 'NOW()', FALSE)->update($user['uid']);
-        // $this->data = [
-        //     'user' => $user,
-        //     'isUserLoggedIn' => true,
+        // $email = \Config\Services::email();
+        // $userVerifyMd = new UserverifyModel();
+
+        // $subject = 'Hillstay Verification';
+
+        // $verifyCode = rand(1000000, 9999999);
+
+        // $message = 'Your verification code is ' . $verifyCode;
+
+        // $verifyData = [
+        //     'uid' => $userData['uid'],
+        //     'type' => 'email',
+        //     'code' => $verifyCode,
         // ];
-        session()->set($user);
-        return true;
+
+        // $userVerifyMd->insert($verifyData);
+
+        // $config['charset']  = 'iso-8859-1';
+        // $config['mailType'] = 'html';
+        // $email->initialize($config);
+
+        // $email->setFrom(APP_NAME, NO_REPLY_EMAIL);
+        // $email->setTo($userData['email']);
+
+        // $email->setSubject($subject);
+        // $email->setMessage($message);
+
+        // return $email->send();
     }
-    // private function uniqidReal($lenght = 13) {
-    //     // uniqid gives 13 chars, but you could adjust it to your needs.
-    //     if (function_exists("random_bytes")) {
-    //         $bytes = random_bytes(ceil($lenght / 2));
-    //     } elseif (function_exists("openssl_random_pseudo_bytes")) {
-    //         $bytes = openssl_random_pseudo_bytes(ceil($lenght / 2));
-    //     } else {
-    //         throw new \Exception("no cryptographically secure random function available");
-    //     }
-    //     return substr(bin2hex($bytes), 0, $lenght);
-    // }
+    public function verifyUserEmail()
+    {
+        $uid = $_GET['uid'];
+        $code = $_GET['code'];
+        $verifyDb = new UserverifyModel();
+        $query = $verifyDb->where(['type' => 'email', 'uid' => $uid, 'code' => $code])->first();
+        $response = [
+            'response' => 'error',
+            'value' => 'Email or code is invalid, please try again later.'
+        ];
+        if ($query) {
+            $userDb = new UserModel();
+            session()->destroy();
 
-    // public function forgetPassword()
-    // {
-    //     
-    //     $admin = new AdminModel();
-    //     helper(['form']);
+            $query['status'] = 1;
+            $query['completed_at'] = date('Y-m-d H:m:s');
+            $verifyDb->save($query);
 
-    //     if ($this->request->getGet('resetcode')) {
-    //         $this->data['pageJS'] = '<script src="/public/custom/assets/js/adminResetPassword.js"></script>';
-    //         if ($this->request->getMethod() == 'post') {
-    //             if ($this->request->getPost('user_email1')) {
-    //                 $user_email = $this->request->getPost('user_email1');
-    //                 $reset_code = $this->request->getPost('reset_code1');
-
-    //                 $resetVerify = $admin->verifyCode($user_email, $reset_code);
-    //                 if ($resetVerify['response'] == 'success') {
-    //                     $this->data['passwordVerified'] = session()->getFlashdata('passwordVerified');
-    //                     $this->data['reset_code'] = session()->getFlashdata('reset_code');
-    //                     $this->data['user_email'] = session()->getFlashdata('user_email');
-    //                 } else {
-    //                     $this->data['errorMessage'] = session()->getFlashdata('errorMessage');
-    //                 }
-    //             }
-    //             if ($this->request->getPost('user_email')) {
-    //                 $user_email = $this->request->getPost('user_email');
-    //                 $reset_code = $this->request->getPost('reset_code');
-    //                 $new_password = $this->request->getPost('new_password');
-
-    //                 $chagePassword = $admin->resetPassword($user_email, $reset_code, $new_password);
-    //                 if ($chagePassword['response'] == 'success') {
-    //                     return redirect()->to('/administrator/login');
-    //                 } else {
-    //                     $this->data['errorMessage'] = session()->getFlashdata('errorMessage');
-    //                 }
-    //             }
-    //         }
-    //         return view('Administrator/Auth/resetpassword', $this->data);
-    //     }
-
-    //     if ($this->request->getMethod() == 'post' && !$this->request->getGet('resetcode')) {
-
-    //         $email = $this->request->getVar('adminEmail');
-
-    //         $this->data = $admin->forgetPassword($email);
-    //         if ($this->data['response'] == 'success') {
-    //             $this->data['successMessage'] = session()->getFlashdata('successMessage');
-    //             return redirect()->to('/administrator/forgetpassword?resetcode='.$email);
-    //         } else {
-    //             $this->data['errorMessage'] = session()->getFlashdata('errorMessage');
-    //         }
-    //     }
-    //     return view('Administrator/Auth/forgetpassword', $this->data);
-    // }
+            $userData = [
+                'uid' => $query['uid'],
+                'emailVerified' => 1
+            ];
+            $userDb->save($userData);
+            $response['response'] = 'success';
+            $response['value'] = 'Email verification successfull.';
+        }
+        $this->data['response'] = $response;
+        return view('Frontend/auth/email_verification', $this->data);
+        // redirect()->route('login_page');
+    }
 }

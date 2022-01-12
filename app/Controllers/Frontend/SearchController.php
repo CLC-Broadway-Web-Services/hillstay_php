@@ -1,29 +1,24 @@
 <?php
 
 namespace App\Controllers\Frontend;
+use App\Controllers\BaseController;
 
-use CodeIgniter\Controller;
-
-class SearchController extends Controller
+class SearchController extends BaseController
 {
 	private $data;
-	private $session;
 
 	public function __construct()
 	{
-		$this->session = session();
 		$this->data = array();
 		$this->data['user_name'] = null;
 		$this->data['user_id'] = null;
-		if (!$this->session->get('isUserLoggedIn')) {
-			$this->data['user_name'] = $this->session->get('firstName');
-			$this->data['user_id'] = $this->session->get('uid');
+		if (!session()->get('isUserLoggedIn')) {
+			$this->data['user_name'] = session()->get('firstName');
+			$this->data['user_id'] = session()->get('uid');
 		}
 	}
 	public function index($list = 'bo')
 	{
-		//
-
 		$this->data['leafletScripts'] = true;
 		// $this->data['pageJS'] = '<script src="/public/custom/assets/js/homepage.js"></script>';
 

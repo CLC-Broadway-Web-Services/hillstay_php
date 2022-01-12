@@ -80,23 +80,23 @@ define('APP_NAME', 'Hillstay');
 define('APP_LOGO', '/public/assets/images/logo.png');
 define('APP_LOGO2', '/public/assets/images/logo2.png');
 define('APP_ICON', '/public/assets/images/favicon.ico');
-define('APP_DESCRIPTION', 'Lets Scale Up');
-define('APP_KEYWORDS', 'Lets Scale Up');
-define('APP_AUTHOR', 'Lets Scale Up');
-define('APP_OWNER', 'Lets Scale Up');
+define('APP_DESCRIPTION', 'Hillstay');
+define('APP_KEYWORDS', 'Hillstay');
+define('APP_AUTHOR', 'Hillstay');
+define('APP_OWNER', 'Hillstay');
 define('APP_PAGE_TYPE', 'website');
 
-define('NO_REPLY_EMAIL', 'no-reply@letsscaleup.in');
+define('NO_REPLY_EMAIL', 'no-reply@hillstay.in');
 define('GMAIL', 'lsuexperts@gmail.com');
-define('INFO_MAIL', 'info@letsscaleup.in');
+define('INFO_MAIL', 'info@hillstay.in');
 
 define('PHONE_NUMBER', 1234567890);
 define('MOBILE', 1234567890);
 define('OTHER_NUMBER', 1234567890);
 
 
-define('LINKEDIN', 'https://www.linkedin.com/company/legaltech-india');
-define('INSTAGRAM', 'https://instagram.com/lets_scale_up?igshid=1f4xs1cne1a6q');
+define('LINKEDIN', 'https://www.linkedin.com/company/hillstay');
+define('INSTAGRAM', 'https://instagram.com/hillstay?igshid=1f4xs1cne1a6q');
 define('TWITTER', '#');
 define('YOUTUBE', '#');
 

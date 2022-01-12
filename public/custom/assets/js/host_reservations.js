@@ -246,7 +246,7 @@ function rejectRequest(id) {
     console.log(id)
     $.ajax({
         method: "POST",
-        url: "/hosting/reservations/approve",
+        url: "/hosting/reservations/reject",
         data: { id: id }
     }).done(function (msg) {
         const response = JSON.parse(msg);

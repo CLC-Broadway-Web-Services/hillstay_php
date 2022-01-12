@@ -12,6 +12,7 @@ class UserverifyModel extends Model
 		'uid',
 		'type',
 		'code',
+		'status',
 		'completed_at',
 	];
     // protected $useSoftDeletes = true;

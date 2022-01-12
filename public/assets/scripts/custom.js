@@ -688,16 +688,16 @@
               .find(".single-slot-time")
               .html(
                 slotTime_Start +
-                  " " +
-                  '<i class="am-pm">' +
-                  slotTimePM_AM_Start +
-                  "</i>" +
-                  " - " +
-                  slotTime_End +
-                  " " +
-                  '<i class="am-pm">' +
-                  slotTimePM_AM_End +
-                  "</i>"
+                " " +
+                '<i class="am-pm">' +
+                slotTimePM_AM_Start +
+                "</i>" +
+                " - " +
+                slotTime_End +
+                " " +
+                '<i class="am-pm">' +
+                slotTimePM_AM_End +
+                "</i>"
               );
           } else {
             newTimeSlot
@@ -743,7 +743,7 @@
         }
       });
     });
-    $(".slots-container").sortable();
+    // $(".slots-container").sortable();
     if ($(".availability-slots").attr("data-clock-type") == "24hr") {
       $(".availability-slots").addClass("twenty-four-clock");
       $(".availability-slots")
@@ -815,13 +815,13 @@
         e.preventDefault();
         var newElem = $(
           "" +
-            '<tr class="pricing-list-item pricing-submenu">' +
-            "<td>" +
-            '<div class="fm-move"><i class="sl sl-icon-cursor-move"></i></div>' +
-            '<div class="fm-input"><input type="text" placeholder="Category Title" /></div>' +
-            '<div class="fm-close"><a class="delete" href="#"><i class="fa fa-remove"></i></a></div>' +
-            "</td>" +
-            "</tr>"
+          '<tr class="pricing-list-item pricing-submenu">' +
+          "<td>" +
+          '<div class="fm-move"><i class="sl sl-icon-cursor-move"></i></div>' +
+          '<div class="fm-input"><input type="text" placeholder="Category Title" /></div>' +
+          '<div class="fm-close"><a class="delete" href="#"><i class="fa fa-remove"></i></a></div>' +
+          "</td>" +
+          "</tr>"
         );
         newElem.appendTo("table#pricing-list-container");
       });
@@ -998,7 +998,7 @@
     $("#message").hide();
     $(
       "#contact input[type=text], #contact input[type=number], #contact input[type=email], #contact input[type=url], #contact input[type=tel], #contact select, #contact textarea"
-    ).each(function () {});
+    ).each(function () { });
     $("#name, #comments, #subject").focusout(function () {
       if (!$(this).val()) {
         $(this)
@@ -1092,7 +1092,8 @@
  * jquery.scrollto.js 0.0.1 - https://github.com/yckart/jquery.scrollto.js
  * Copyright (c) 2012 Yannick Albert (http://yckart.com)
  * Licensed under the MIT license (http://www.opensource.org/licenses/mit-license.php).
- **/ $.scrollTo = $.fn.scrollTo = function (x, y, options) {
+ **/
+$.scrollTo = $.fn.scrollTo = function (x, y, options) {
   if (!(this instanceof $))
     return $.fn.scrollTo.apply($("html, body"), arguments);
   options = $.extend(
@@ -1249,8 +1250,32 @@ var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
 
 
 $(window).on("load resize", function () {
-    var panelTrigger = $(".booking-widget .panel-dropdown a");
-    $(".booking-widget .panel-dropdown .panel-dropdown-content").css({
-        width: panelTrigger.outerWidth(),
-    });
+  var panelTrigger = $(".booking-widget .panel-dropdown a");
+  $(".booking-widget .panel-dropdown .panel-dropdown-content").css({
+    width: panelTrigger.outerWidth(),
+  });
 });
+
+
+
+function imagePreview(event, id, oldImage) {
+  console.log(event);
+  const imageFile = event.files[0];
+  if (imageFile) {
+    if (imageFile.type == 'image/jpeg') {
+      var reader = new FileReader();
+      reader.onload = function () {
+        var output = document.getElementById(id + '_image');
+        output.src = reader.result;
+      };
+      reader.readAsDataURL(event.files[0]);
+      $('#' + id + '_error').html('');
+    } else {
+      event.value = '';
+      var output = document.getElementById(id + '_image');
+      output.src = oldImage;
+      $('#' + id + '_error').html('Image/File type not supported, please upload only JPEG images');
+      alert('Image/File type not supported, please upload only JPEG images');
+    }
+  }
+}

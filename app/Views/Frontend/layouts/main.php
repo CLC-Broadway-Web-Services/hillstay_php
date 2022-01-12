@@ -43,16 +43,11 @@ if (isset($type)) {
 	<!-- favicon -->
 	<link rel="shortcut icon" href="/public/assets/images/favicon.ico">
 	<!-- css -->
-	<!-- <link rel="stylesheet" href="/public/assets/css/style.css"> -->
-	<!-- <link rel="stylesheet" href="/public/assets/css/style.css"> -->
-	<!-- <link rel="stylesheet" href="/public/assets/css/main-color.css" id="colors"> -->
-	<!-- <link rel="stylesheet" href="/public/libraries/bootstrap5/css/bootstrap.css"> -->
-	<!-- <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" /> -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+	<link rel="stylesheet" href="https://npmcdn.com/flatpickr/dist/themes/airbnb.css">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="/public/assets/css/style2.css">
-	<!-- <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/material_green.css"> -->
 
 	<!-- page css -->
 	<?php if (isset($pageCSS)) {

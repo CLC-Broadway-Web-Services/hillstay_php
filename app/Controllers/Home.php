@@ -55,7 +55,4 @@ class Home extends BaseController
 
 		return view('Frontend/pages/homepage', $this->data);
 	}
-
-	//--------------------------------------------------------------------
-
 }

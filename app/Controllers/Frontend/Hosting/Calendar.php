@@ -2,9 +2,9 @@
 
 namespace App\Controllers\Frontend\Hosting;
 
-use CodeIgniter\Controller;
+use App\Controllers\BaseController;
 
-class Calendar extends Controller
+class Calendar extends BaseController
 {
 	private $data;
 

@@ -2,9 +2,9 @@
 
 namespace App\Controllers\Frontend\Hosting;
 
-use CodeIgniter\Controller;
+use App\Controllers\BaseController;
 
-class Progress extends Controller
+class Progress extends BaseController
 {
 	private $data;
 

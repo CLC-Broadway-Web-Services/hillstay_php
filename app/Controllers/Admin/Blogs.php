@@ -232,7 +232,6 @@ class Blogs extends BaseController
 
         return view('Administrator/Dashboard/dashboard', $data);
     }
-
     private function uploadBlogImages($file)
     {
 		$img = $file;

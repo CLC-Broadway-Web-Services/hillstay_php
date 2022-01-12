@@ -305,7 +305,7 @@
                             <div class="col-md-6 col-sm-12 col-xs-12">
                                 <p>These are just the amenities guests usually expect, but you can add even more after
                                     you publish.</p>
-                                <div formGroupName="amenities" class="checkboxes in-row margin-bottom-20">
+                                <div class="checkboxes in-row margin-bottom-20">
                                     <div>
                                         <input id="amenity_essentials" type="checkbox" name="amenity_essentials">
                                         <label for="amenity_essentials">
@@ -376,7 +376,7 @@
                         </div>
                         <div class="row with-forms">
                             <div class="col-md-6 col-sm-12 col-xs-12">
-                                <div formGroupName="safety" class="checkboxes in-row margin-bottom-20">
+                                <div class="checkboxes in-row margin-bottom-20">
                                     <div>
                                         <input id="safety_smoke_detector" type="checkbox" name="safety_smoke_detector">
                                         <label for="safety_smoke_detector">
@@ -425,7 +425,7 @@
                         <div class="row with-forms">
                             <div class="col-md-6 col-sm-12 col-xs-12">
                                 <p>Include common areas, but don’t add spaces that aren’t on your property.</p>
-                                <div class="checkboxes in-row margin-bottom-20" formGroupName="guestspaces">
+                                <div class="checkboxes in-row margin-bottom-20">
                                     <div>
                                         <input id="guestspace_kitchen" type="checkbox" name="guestspace_kitchen">
                                         <label for="guestspace_kitchen">Kitchen</label>
@@ -615,7 +615,7 @@
                                     </div>
                                     <hr>
                                     <div class="col-12 mt-5">
-                                        <p>All Airbnb guests must provide:</p>
+                                        <p>All Hillstay guests must provide:</p>
                                         <div class="list-2">
                                             <ul>
                                                 <li>Email address</li>
@@ -646,7 +646,7 @@
                                         <div>
                                             <input id="requirementsgovtid" type="checkbox" name="requirementsgovtid">
                                             <label for="requirementsgovtid">
-                                                Government-issued ID submitted to Airbnb
+                                                Government-issued ID submitted to Hillstay
                                             </label>
                                         </div>
                                         <div>
@@ -899,11 +899,6 @@
                                             <small>
                                                 Mark the boxes to confirm you understand:
                                             </small>
-                                            <!-- <p *ngIf="(_onedayresponse.invalid && (_onedayresponse.dirty || _onedayresponse.touched)) ||
-											(_nohostprotection.invalid && (_nohostprotection.dirty || _nohostprotection.touched)) ||
-											(_ranklower.invalid && (_ranklower.dirty || _ranklower.touched))" class="text-danger">
-                                                Please agree all below terms before continue
-                                            </p> -->
                                             <div class="checkboxes in-row">
                                                 <input class="reviewedCheckboxes" id="reviewedbooking_onedayresponse" type="checkbox" name="reviewedbooking_onedayresponse" required="required">
                                                 <label for="reviewedbooking_onedayresponse">
@@ -969,7 +964,7 @@
                                             <div class="instantCol" style="padding-left:10px;">
                                                 <h4><strong>You’re protected throughout</strong></h4>
                                                 <p>
-                                                    In the rare event that there are issues, Airbnb has you covered with
+                                                    In the rare event that there are issues, Hillstay has you covered with
                                                     24/7 customer
                                                     support, a ₹60,000,000 Host
                                                     Guarantee, and completely penalty-free cancellations if you’re
@@ -1281,7 +1276,7 @@
                             </div>
                         </div>
                     <?php endif; ?>
-                    <!-- Payment Mode -->
+                    <!-- Payment & Contact Mode -->
                     <?php if ($_steps == 22) : ?>
                         <div id="add-listing-headline" class="add-listing-headline">
                             <h3><i class="sl sl-icon-doc"></i> Payout & Contact Info</h3>
@@ -1333,7 +1328,11 @@
                                     <p>No Methods found,</p>
                                 <?php } ?>
                                 <a href="#add_payment_method" class="button sign-in popup-with-zoom-anim mt-2">
-                                    <?php if ($payment_methods) {echo 'Add Another Payment Method';} else {echo 'Add Payment Method';} ?>
+                                    <?php if ($payment_methods) {
+                                        echo 'Add Another Payment Method';
+                                    } else {
+                                        echo 'Add Payment Method';
+                                    } ?>
                                 </a>
                             </div>
                             <div class="col-md-6 col-sm-12 col-xs-12">
@@ -1364,7 +1363,11 @@
                                     <p>No Contact information found,</p>
                                 <?php } ?>
                                 <a href="#add_contact_info" class="button sign-in popup-with-zoom-anim mt-2">
-                                    <?php if ($contact_info) {echo 'Add Another Contact';} else {echo 'Add Contact';} ?>
+                                    <?php if ($contact_info) {
+                                        echo 'Add Another Contact';
+                                    } else {
+                                        echo 'Add Contact';
+                                    } ?>
                                 </a>
                             </div>
                             <!-- <div class="col-12"></div> -->
@@ -1421,7 +1424,7 @@
                                         <p>
                                             <strong>
                                                 Make sure you familiarise yourself with your local laws as well as <br>
-                                                <a routerLink="#">Airbnb’s Nondiscrimination Policy.</a>
+                                                <a routerLink="#">Hillstay Nondiscrimination Policy.</a>
                                             </strong>
                                         </p>
                                         <p>
@@ -1443,7 +1446,7 @@
                                         <p>
                                             Since you are responsible for your own decision to list, you should get
                                             comfortable with the
-                                            applicable rules before listing on Airbnb. To get you started, we offer some
+                                            applicable rules before listing on Hillstay. To get you started, we offer some
                                             helpful resources under
                                             "Your City Laws".<br>
                                             <a routerLink="#"><strong>Learn more about responsible hosting</strong></a>
@@ -1600,11 +1603,13 @@
         float: right;
     }
 
-    #add_payment_method, #add_contact_info {
+    #add_payment_method,
+    #add_contact_info {
         background: #fff;
     }
 
-    #add_payment_method .mfp-close,#add_contact_info .mfp-close {
+    #add_payment_method .mfp-close,
+    #add_contact_info .mfp-close {
         color: #3d3d3d;
         top: -13px;
         right: 0;

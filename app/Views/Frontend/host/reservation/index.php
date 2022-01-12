@@ -105,40 +105,6 @@
                 <div class="col-md-6">
                     <h4 class="headline">Booking Details</h4>
                     <table class="table table-success table-striped table-hover" id="bookingDetailsTable">
-                        <!-- <tbody>
-                            <tr>
-                                <td>Status</td>
-                                <td>listing-status_name</td>
-                            </tr>
-                            <tr>
-                                <td>Nights</td>
-                                <td>listing-total_nights</td>
-                            </tr>
-                            <tr>
-                                <td>Price <small>Per night</small></td>
-                                <td>listing-price_per_night</td>
-                            </tr>
-                            <tr>
-                                <td>Total Amount</td>
-                                <td>listing-price_total</td>
-                            </tr>
-                            <tr>
-                                <td>Service Charges</td>
-                                <td>listing-servicePrices</td>
-                            </tr>
-                            <tr>
-                                <td>Guests</td>
-                                <td>listing-guest_adults, listing-guest_chldren, listing-guest_infants</td>
-                            </tr>
-                            <tr>
-                                <td>Discount</td>
-                                <td>listing-discount_amount</td>
-                            </tr>
-                            <tr>
-                                <td>Discount Type</td>
-                                <td>listing-discount_type</td>
-                            </tr>
-                        </tbody> -->
                     </table>
 
                 </div>
@@ -146,40 +112,6 @@
                 <div class="col-md-6 style-1">
                     <h4 class="headline">Guest Details</h4>
                     <div class="style-1" id="reservationGuestsAccordian">
-
-                        <!-- <div class="toggle-wrap">
-                            <span class="trigger "><a href="#">listing-guest_name<i class="sl sl-icon-plus"></i></a></span>
-                            <div class="toggle-container">
-                                <table class="table table-success table-striped table-hover">
-                                    <tbody>
-                                        <tr>
-                                            <td>Age</td>
-                                            <td>listing-guest_age</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Gender</td>
-                                            <td>listing-guest_gender</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Any Flu Symptomns</td>
-                                            <td>listing-flu_symptoms</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Any Chronic Medical Condition</td>
-                                            <td>listing-chronic_medical_condition</td>
-                                        </tr>
-                                        <tr>
-                                            <td>On Medication</td>
-                                            <td>listing-on_medication</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Health Insurance</td>
-                                            <td>listing-health_insurance</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div> -->
 
                     </div>
                 </div>

@@ -3,9 +3,9 @@
 namespace App\Controllers\Frontend;
 
 use App\Models\Admin\ProjectsModel;
-use CodeIgniter\Controller;
+use App\Controllers\BaseController;
 
-class Clients extends Controller
+class Clients extends BaseController
 {
 	public function index()
 	{
@@ -57,5 +57,4 @@ class Clients extends Controller
 
 		return view('Frontend/clients/single', $data);
 	}
-
 }

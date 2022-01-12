@@ -1,6 +1,42 @@
 <?= $this->extend('Frontend/layouts/host_layout'); ?>
 
 <?= $this->section('content'); ?>
+<style>
+    .messages-container-inner {
+        max-height: 650px;
+        min-height: 200px;
+    }
+
+    .messages-container-inner .message-content .all-messages {
+        max-height: 400px;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        padding: 20px;
+    }
+
+    .message-bubble.notification {
+        padding: 0;
+    }
+
+    .message-bubble.notification .message-text {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .message-bubble.notification .message-text::before {
+        display: none;
+    }
+
+    .message-bubble .message-date {
+        font-size: 75% !important;
+        text-align: right;
+    }
+
+    #messagesContainer {
+        text-align: center;
+        padding: 20px;
+    }
+</style>
 <!-- <div id="dashboard"> -->
 <div class="dashboard-content">
 
@@ -66,38 +102,66 @@
                                             </div>
                                         </div>
                                     <?php else : ?>
-                                        <?php if ($message['messagebyuser']) : ?>
-                                            <div class="message-bubble">
-                                                <div class="message-avatar">
-                                                    <?php if ($guest['photoURL']) : ?>
-                                                        <img src="<?= $guest['photoURL'] ?>" alt="<?= $message['userName'] ?>" />
-                                                    <?php else : ?>
-                                                        <img src="images/dashboard-avatar.png" alt="<?= $message['userName'] ?>" />
-                                                    <?php endif; ?>
+                                        <?php if (!$message['isNotification']) : ?>
+                                            <?php if ($message['messagebyuser']) : ?>
+                                                <div class="message-bubble">
+                                                    <div class="message-avatar">
+                                                        <?php if ($guest['photoURL']) : ?>
+                                                            <img src="<?= $guest['photoURL'] ?>" alt="<?= $message['userName'] ?>" />
+                                                        <?php else : ?>
+                                                            <img src="images/dashboard-avatar.png" alt="<?= $message['userName'] ?>" />
+                                                        <?php endif; ?>
+                                                    </div>
+                                                    <div class="message-text">
+                                                        <p><?= $message['message'] ?></p>
+                                                        <p class="message-date">
+                                                            <?= date('M d, Y, g:s:a', strtotime($message['created_at'])) ?>
+                                                        </p>
+                                                    </div>
                                                 </div>
-                                                <div class="message-text">
-                                                    <p><?= $message['message'] ?></p>
-                                                    <p class="message-date">
-                                                        <?= date('M d, Y, g:s:a', strtotime($message['created_at'])) ?>
-                                                    </p>
+                                            <?php else : ?>
+                                                <div class="message-bubble me">
+                                                    <div class="message-avatar">
+                                                        <?php if ($host_image) : ?>
+                                                            <img src="<?= $host_image ?>" alt="<?= $user_name ?>" />
+                                                        <?php else : ?>
+                                                            <img src="images/dashboard-avatar.png" alt="<?= $user_name ?>" />
+                                                        <?php endif; ?>
+                                                    </div>
+                                                    <div class="message-text">
+                                                        <p><?= $message['message'] ?></p>
+                                                        <p class="message-date">
+                                                            <?= date('M d, Y, g:s:a', strtotime($message['created_at'])) ?>
+                                                        </p>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            <?php endif; ?>
                                         <?php else : ?>
-                                            <div class="message-bubble me">
-                                                <div class="message-avatar">
-                                                    <?php if ($host_image) : ?>
-                                                        <img src="<?= $host_image ?>" alt="<?= $user_name ?>" />
-                                                    <?php else : ?>
-                                                        <img src="images/dashboard-avatar.png" alt="<?= $user_name ?>" />
-                                                    <?php endif; ?>
+                                            <?php if ($message['notificationType'] == 'rtpcr_request' && $message['message'] == 'requested') : ?>
+                                                <div class="alert alert-info" role="alert">
+                                                    <b>Send an request to guest for RTPCR certificate.</b><br>
+                                                    <small><?= date('M d, Y, g:s:a', strtotime($message['created_at'])) ?></small>
                                                 </div>
-                                                <div class="message-text">
-                                                    <p><?= $message['message'] ?></p>
-                                                    <p class="message-date">
-                                                        <?= date('M d, Y, g:s:a', strtotime($message['created_at'])) ?>
-                                                    </p>
+                                            <?php endif; ?>
+                                            <?php if ($message['notificationType'] == 'rtpcr_uploaded') : ?>
+                                                <div class="alert alert-info" role="alert">
+                                                    <b>Guest uploaded RTPCR report please check.</b><br>
+                                                    <b><a download="RTPCR-<?= $guest["firstName"] . ' ' . $guest["lastname"] ?>" href="<?= $message['message']['rtpcr_certificate'] ?>">Download RTPCR</a></b><br>
+                                                    <small><?= date('M d, Y, g:s:a', strtotime($message['created_at'])) ?></small>
                                                 </div>
-                                            </div>
+                                            <?php endif; ?>
+                                            <?php if ($message['notificationType'] == 'rtpcr_rejected') : ?>
+                                                <div class="alert alert-danger" role="alert">
+                                                    <b>Your RTPCR report rejected, please contact host.</b><br>
+                                                    <small><?= date('M d, Y, g:s:a', strtotime($message['created_at'])) ?></small>
+                                                </div>
+                                            <?php endif; ?>
+                                            <?php if ($message['notificationType'] == 'rtpcr_approved') : ?>
+                                                <div class="alert alert-success" role="alert">
+                                                    <b>Your RTPCR report report is approved.</b><br>
+                                                    <small><?= date('M d, Y, g:s:a', strtotime($message['created_at'])) ?></small>
+                                                </div>
+                                            <?php endif; ?>
                                         <?php endif; ?>
                                     <?php endif; ?>
                                 <?php endforeach; ?>
@@ -106,7 +170,12 @@
                             <div class="clearfix"></div>
                             <form class="message-reply" id="message-reply" method="post">
                                 <textarea cols="40" rows="3" name="message" placeholder="Your Message"></textarea>
-                                <button class="button" type="submit">Send Message</button>
+                                <button type="submit" class="btn btn-primary">Send Message</button>
+                                <div class="float-end" role="group" aria-label="Basic example">
+                                    <a href="<?= route_to('public_profile_page', $current_guest) ?>" target="_blank" type="button" class="btn btn-info">Go to guest profile</a>
+                                    <button type="button" class="btn btn-primary" onclick="requestRtpcr()">Request RTPCR</button>
+                                </div>
+                                <!-- <button class="button" type="submit">Send Message</button> -->
                             </form>
                         <?php else : ?>
                             <div id="messagesContainer">
@@ -129,43 +198,6 @@
 </div>
 <!-- </div> -->
 
-<style>
-    .messages-container-inner {
-        max-height: 650px;
-        min-height: 200px;
-    }
-
-    .messages-container-inner .message-content .all-messages {
-        max-height: 400px;
-        overflow-x: hidden;
-        overflow-y: scroll;
-        padding: 20px;
-    }
-
-    .message-bubble.notification {
-        padding: 0;
-    }
-
-    .message-bubble.notification .message-text {
-        margin-left: 0;
-        margin-right: 0;
-    }
-
-    .message-bubble.notification .message-text::before {
-        display: none;
-    }
-
-    .message-bubble .message-date {
-        font-size: 75% !important;
-        text-align: right;
-    }
-
-    #messagesContainer {
-        text-align: center;
-        padding: 20px;
-    }
-</style>
-
 <?= $this->endSection(); ?>
 
 <?= $this->section('footerScripts'); ?>
@@ -174,7 +206,44 @@
     if ($('#all-messages')) {
         $('#all-messages').scrollTop($('#all-messages')[0].scrollHeight);
     }
-    // $('#all-messages').scrollTop($('#all-messages').height());
-    // });
 </script>
+
+<?php if (isset($chatBox)) : ?>
+    <script>
+        function requestRtpcr() {
+            var formData = new FormData();
+            formData.append('form_name', 'rtpcr');
+            formData.append('user_email', '<?= $guest["email"] ?>');
+            formData.append('user_id', '<?= $guest["uid"] ?>');
+            formData.append('user_name', '<?= $guest["firstName"] . ' ' . $guest["lastname"] ?>');
+            formData.append('host_id', '<?= $user_id ?>');
+            formData.append('host_name', '<?= $user_name ?>');
+            formData.append('listing_id', '<?= $lastBooking["listing_id"] ?>');
+            formData.append('inbox_id', '<?= $inbox["id"] ?>');
+            formData.append('booking_id', '<?= $lastBooking["id"] ?>');
+            // add chat id from chat which in saved in the process
+            formData.append('status', 'requested');
+            console.log(Array.from(formData));
+            $.ajax({
+                url: '',
+                type: 'post',
+                data: formData,
+                contentType: false,
+                processData: false,
+            }).done(function(data) {
+                console.log(data);
+                if (JSON.parse(data)) {
+                    alert(JSON.parse(data)['message']);
+                    location.reload();
+                }
+                // console.log(JSON.parse(data));
+            }).fail(function(data) {
+                console.log(data);
+                alert('Server error, Please try again later.');
+            });
+        }
+        // $('#all-messages').scrollTop($('#all-messages').height());
+        // });
+    </script>
+<?php endif; ?>
 <?= $this->endSection(); ?>

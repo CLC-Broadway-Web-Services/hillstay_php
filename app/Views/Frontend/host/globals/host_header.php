@@ -51,25 +51,22 @@
 
                     <div class="user-menu" id="userdropdownmenu" style="margin-right: 0">
                         <div class="user-name">
-                            <span><img src="/public/assets/images/dashboard-avatar.jpg" alt="" /></span>Account
+                            <span><img src="<?= session()->get('user.photoURL') ? session()->get('user.photoURL') : '/public/assets/images/dashboard-avatar.jpg' ?>" alt="<?= session()->get('user.firstName') ?>" /></span>Account
                         </div>
                         <ul>
                             <li>
-                                <a href="/user/"><i class="sl sl-icon-settings"></i> Profile</a>
+                                <a href="<?= route_to('account_transaction_history') ?>"><i class="fa fa-history"></i> Transaction History</a>
                             </li>
                             <li>
                                 <a href="<?= route_to('account_settings') ?>"><i class="sl sl-icon-envelope-open"></i> Account</a>
                             </li>
                             <li>
-                                <a href="<?= route_to('account_transaction_history') ?>"><i class="fa fa-calendar-check-o"></i> Transaction History</a>
+                                <a href="<?= route_to('hosting_listing_add_new') ?>"><i class="sl sl-icon-plus"></i> Add New Listing</a>
                             </li>
                             <li class="dropdown-divider"></li>
+                            <li><a href="<?= route_to('account_verification') ?>"><i class="fa fa-shield"></i> Verification</a></li>
                             <li>
-                                <a href="<?= route_to('hosting_listing_add_new') ?>"><i class="sl sl-icon-settings"></i> Add New Listing</a>
-                            </li>
-                            <li class="dropdown-divider"></li>
-                            <li>
-                                <a href="<?= route_to('home_page') ?>"><i class="sl sl-icon-settings"></i> Switch to Travelling</a>
+                                <a href="<?= route_to('home_page') ?>"><i class="im im-icon-Switch"></i> Switch to Travelling</a>
                             </li>
                             <li>
                                 <a href="<?= route_to('logout_user') ?>"><i class="sl sl-icon-power"></i> Logout</a>

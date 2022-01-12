@@ -1,6 +1,12 @@
 <?= $this->extend('Frontend/layouts/homeLayout'); ?>
 
 <?= $this->section('content'); ?>
+<style>
+    .all-messages input[type="file"] {
+        height: fit-content;
+        margin: 0;
+    }
+</style>
 <div class="container mt-5">
     <div class="row">
 
@@ -64,38 +70,79 @@
                                             </div>
                                         </div>
                                     <?php else : ?>
-                                        <?php if ($message['messagebyuser']) : ?>
-                                            <div class="message-bubble me">
-                                                <div class="message-avatar">
-                                                    <?php if ($host['photoURL']) : ?>
-                                                        <img src="<?= $host['photoURL'] ?>" alt="<?= $message['userName'] ?>" />
-                                                    <?php else : ?>
-                                                        <img src="images/dashboard-avatar.png" alt="<?= $message['userName'] ?>" />
-                                                    <?php endif; ?>
+                                        <?php if (!$message['isNotification']) : ?>
+                                            <?php if ($message['messagebyuser']) : ?>
+                                                <div class="message-bubble me">
+                                                    <div class="message-avatar">
+                                                        <?php if ($host['photoURL']) : ?>
+                                                            <img src="<?= $host['photoURL'] ?>" alt="<?= $message['userName'] ?>" />
+                                                        <?php else : ?>
+                                                            <img src="images/dashboard-avatar.png" alt="<?= $message['userName'] ?>" />
+                                                        <?php endif; ?>
+                                                    </div>
+                                                    <div class="message-text">
+                                                        <p><?= $message['message'] ?></p>
+                                                        <p class="message-date">
+                                                            <?= date('M d, Y, g:s:a', strtotime($message['created_at'])) ?>
+                                                        </p>
+                                                    </div>
                                                 </div>
-                                                <div class="message-text">
-                                                    <p><?= $message['message'] ?></p>
-                                                    <p class="message-date">
-                                                        <?= date('M d, Y, g:s:a', strtotime($message['created_at'])) ?>
-                                                    </p>
+                                            <?php else : ?>
+                                                <div class="message-bubble">
+                                                    <div class="message-avatar">
+                                                        <?php if ($user_data['photoURL']) : ?>
+                                                            <img src="<?= $user_data['photoURL'] ?>" alt="<?= $user_data['firstName'] . ' ' . $user_data['lastname'] ?>" />
+                                                        <?php else : ?>
+                                                            <img src="images/dashboard-avatar.png" alt="<?= $user_data['firstName'] . ' ' . $user_data['lastname'] ?>" />
+                                                        <?php endif; ?>
+                                                    </div>
+                                                    <div class="message-text">
+                                                        <p><?= $message['message'] ?></p>
+                                                        <p class="message-date">
+                                                            <?= date('M d, Y, g:s:a', strtotime($message['created_at'])) ?>
+                                                        </p>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            <?php endif; ?>
                                         <?php else : ?>
-                                            <div class="message-bubble">
-                                                <div class="message-avatar">
-                                                    <?php if ($user_data['photoURL']) : ?>
-                                                        <img src="<?= $user_data['photoURL'] ?>" alt="<?= $user_data['firstName'] .' '.$user_data['lastname'] ?>" />
-                                                    <?php else : ?>
-                                                        <img src="images/dashboard-avatar.png" alt="<?= $user_data['firstName'] .' '.$user_data['lastname'] ?>" />
-                                                    <?php endif; ?>
+                                            <?php if ($message['notificationType'] == 'rtpcr_request' && $message['message'] == 'requested') : ?>
+                                                <div class="alert alert-info" role="alert">
+                                                    Please upload your RTPCR certificate below.<br>
+                                                    <form class="input-group mb-3 rtpcrForm" method="post" enctype="multipart/form-data">
+                                                        <input class="d-none" name="rtcprForm" value="1">
+                                                        <input class="d-none" name="chat_id" value="<?= $message['mid'] ?>">
+                                                        <input class="d-none" name="user_id" value="<?= $inbox['guest_id'] ?>">
+                                                        <input class="d-none" name="user_name" value="<?= $inbox['guest_name'] ?>">
+                                                        <input class="d-none" name="host_id" value="<?= $inbox['host_id'] ?>">
+                                                        <input class="d-none" name="host_name" value="<?= $inbox['host_name'] ?>">
+                                                        <input class="d-none" name="booking_id" value="<?= $lastBooking['id'] ?>">
+                                                        <input class="d-none" name="listing_id" value="<?= $lastBooking['listing_id'] ?>">
+                                                        <input class="d-none" name="inbox_id" value="<?= $inbox['id'] ?>">
+                                                        <input class="d-none" name="status" value="uploaded">
+                                                        <input name="rtpcr_certificate" type="file" class="form-control" required>
+                                                        <button class="btn btn-outline-secondary" type="submit">Upload</button>
+                                                    </form>
+                                                    <small><?= date('M d, Y, g:s:a', strtotime($message['created_at'])) ?></small>
                                                 </div>
-                                                <div class="message-text">
-                                                    <p><?= $message['message'] ?></p>
-                                                    <p class="message-date">
-                                                        <?= date('M d, Y, g:s:a', strtotime($message['created_at'])) ?>
-                                                    </p>
+                                            <?php endif; ?>
+                                            <?php if ($message['notificationType'] == 'rtpcr_uploaded') : ?>
+                                                <div class="alert alert-info" role="alert">
+                                                    <b>Your RTPCR report uploaded successfully.</b><br>
+                                                    <small><?= date('M d, Y, g:s:a', strtotime($message['created_at'])) ?></small>
                                                 </div>
-                                            </div>
+                                            <?php endif; ?>
+                                            <?php if ($message['notificationType'] == 'rtpcr_rejected') : ?>
+                                                <div class="alert alert-danger" role="alert">
+                                                    <b>Your RTPCR report rejected, please contact host.</b><br>
+                                                    <small><?= date('M d, Y, g:s:a', strtotime($message['created_at'])) ?></small>
+                                                </div>
+                                            <?php endif; ?>
+                                            <?php if ($message['notificationType'] == 'rtpcr_approved') : ?>
+                                                <div class="alert alert-success" role="alert">
+                                                    <b>Your RTPCR report report is approved.</b><br>
+                                                    <small><?= date('M d, Y, g:s:a', strtotime($message['created_at'])) ?></small>
+                                                </div>
+                                            <?php endif; ?>
                                         <?php endif; ?>
                                     <?php endif; ?>
                                 <?php endforeach; ?>
@@ -136,5 +183,21 @@
     }
     // $('#all-messages').scrollTop($('#all-messages').height());
     // });
+    // $('.rtpcrForm').submit(function(event) {
+    //     event.preventDefault();
+    //     var formData = new FormData($(this)[0]);
+    //     console.log(Array.from(formData));
+    //     $.ajax({
+    //         url: '',
+    //         type: 'post',
+    //         data: formData,
+    //         contentType: false,
+    //         processData: false
+    //     }).done(function(data) {
+    //         console.log(data)
+    //     }).fail(function(data) {
+    //         console.log(data)
+    //     })
+    // })
 </script>
 <?= $this->endSection(); ?>

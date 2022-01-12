@@ -119,6 +119,7 @@ class ListingModel extends Model
 		'housedetails_weapons_desc',
 		'housedetails_dangerousaminals',
 		'housedetails_dangerousaminals_desc',
+		'additoinal_rules',
 		// STEP 14
 		'instantbooking',
 		'reviewedbooking',

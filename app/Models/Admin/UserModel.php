@@ -4,6 +4,7 @@ namespace App\Models\Admin;
 
 use CodeIgniter\Model;
 use App\Models\Globals\PasswordresetModel;
+use App\Models\Globals\UserVerificationModel;
 
 class UserModel extends Model
 {
@@ -22,17 +23,15 @@ class UserModel extends Model
 		'phone',
 		'phoneVerified',
 		'photoURL',
-		'govID',
-		'govIDverified',
 		'languages',
 		'gender',
 		'addressLine1',
 		'addressLine2',
 		'state',
 		'city',
+		'pincode',
 		'country',
-		'lastLogin',
-		'isHost',
+		'lastLogin'
 	];
 	protected $useSoftDeletes = true;
 	protected $useTimestamps = true;
@@ -76,26 +75,39 @@ class UserModel extends Model
 			return $error;
 		}
 	}
-	public function userRegistration($userData)
-	{
-	}
 	public function setUserMethod($user)
 	{
-		$user = [
-			'uid' => $user['uid'],
-			'firstName' => $user['firstName'],
-			'lastname' => $user['lastname'],
-			'email' => $user['email'],
-			'phone' => $user['phone'],
-			'photoURL' => $user['photoURL'],
-			'lastLogin' => $user['lastLogin'],
-			'registered' => $user['registered'],
-			'updated_time' => $user['updated_time'],
-		];
-		$data = [
-			'user' => $user,
-			'isUserLoggedIn' => true,
-		];
+		unset($user['password']);
+		$userId = $user['uid'];
+		$verifyData = new UserVerificationModel();
+		$verification = $verifyData->where('user_id', $userId)->first();
+		// $user = [
+		// 	'uid' => $user['uid'],
+		// 	'firstName' => $user['firstName'],
+		// 	'lastname' => $user['lastname'],
+		// 	'email' => $user['email'],
+		// 	'phone' => $user['phone'],
+		// 	'photoURL' => $user['photoURL'],
+		// 	'lastLogin' => $user['lastLogin'],
+		// 	'registered' => $user['registered'],
+		// 	'updated_time' => $user['updated_time'],
+		// ];
+		// $data = [
+		// 	'user' => $user,
+		// 	'isUserLoggedIn' => true,
+		// ];
+		// session()->set($data);
+		// return true;
+		$data['isUserLoggedIn'] = true;
+		$data['uid'] = $user['uid'];
+		$data['user'] = $user;
+		$data['user_verification'] = $verification;
+		$user['lastLogin'] = $user['lastLogin'];
+		$this->set('lastLogin', 'NOW()', FALSE)->update($user['uid']);
+		// $this->data = [
+		//     'user' => $user,
+		//     'isUserLoggedIn' => true,
+		// ];
 		session()->set($data);
 		return true;
 	}
@@ -273,9 +285,44 @@ class UserModel extends Model
 		}
 		return false;
 	}
+	public function currentUserAadhaarVerify()
+	{
+		$data = session()->get('user_verification');
+		if ($data && $data['aadhaar_status'] == '1') {
+			return true;
+		}
+		return false;
+	}
+	public function aadhaarVerifyById($userId)
+	{
+		$verifyDb = new UserVerificationModel();
+		$data = $verifyDb->where('user_id', $userId)->first();
+		if ($data && $data['aadhaar_status'] == '1') {
+			return true;
+		}
+		return false;
+	}
+	public function currentUserPancardVerify()
+	{
+		$data = session()->get('user_verification');
+		if ($data && $data['pancard_status'] == '1') {
+			return true;
+		}
+		return false;
+	}
+	public function pancardVerifyById($userId)
+	{
+		$verifyDb = new UserVerificationModel();
+		$data = $verifyDb->where('user_id', $userId)->first();
+		if ($data && $data['pancard_status'] == '1') {
+			return true;
+		}
+		return false;
+	}
 
-	public function getGuestDetails($uid){
-		$guest = $this->select('uid, firstName, lastname, email, emailVerified, medical_history_id, aboutuser, phone, emailVerified, photoURL, govID, govIDverified, gender, addressLine1, addressLine2, state, city, country')->find($uid);
+	public function getGuestDetails($uid)
+	{
+		$guest = $this->select('uid, firstName, lastname, email, emailVerified, medical_history_id, aboutuser, phone, emailVerified, photoURL, gender, addressLine1, addressLine2, state, city, country')->find($uid);
 		$medicalDB = new UsermedicalModel();
 		$guest['medial_data'] = $medicalDB->find($guest['medical_history_id']);
 		return $guest;

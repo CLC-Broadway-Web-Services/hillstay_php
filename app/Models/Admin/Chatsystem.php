@@ -23,6 +23,8 @@ class Chatsystem extends Model
 		'message',
 		'messagebyuser',
 		'notifyUserWeb',
+		'isNotification',
+		'notificationType', // rtpcr / other
 		'isBookingNotification',
 		'bookingStatus',
 		'checkin',
@@ -31,7 +33,8 @@ class Chatsystem extends Model
 		'price_total',
 		'total_nights',
 		'listing_name',
-		'listing_id'
+		'listing_id',
+		'isRead'
 	];
 
 	// Dates
@@ -72,14 +75,14 @@ class Chatsystem extends Model
 		// $inboxDb->update('users');
 	}
 	protected function callAfterInsert(array $data)
-    {
+	{
 		$chatData = $this->find($data['id']);
 		$inboxId = $chatData['inbox'];
 		$inbox_m = new InboxModel();
 		$query = $inbox_m->set('total_chats', 'total_chats+1', false)->update($inboxId);
-      
-        // log_message("info", "Running method after insert");
 
-        return $query;
-    }
+		// log_message("info", "Running method after insert");
+
+		return $query;
+	}
 }

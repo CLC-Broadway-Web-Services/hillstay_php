@@ -79,6 +79,9 @@ class Database extends \CodeIgniter\Database\Config
 		'port'     => 3306,
 	];
 
+	// public $dbusername = 'admin';
+	// public $dbpassword = '23988725';
+	// public $dbdatabase = 'broadway_hillstay';
 	public $development = [
 		'DSN'      => '',
 		'hostname' => 'localhost',

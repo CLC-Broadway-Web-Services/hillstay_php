@@ -36,16 +36,19 @@ $routes->setAutoRoute(false);
 $routes->group('/', function ($routes) {
 	$routes->get('', 'Home::index', ['as' => 'home_page']);
 	$routes->match(['get', 'post'], 'login', 'Frontend\Auth::login', ['as' => 'login_page']);
+	$routes->match(['get', 'post'], 'email-verification', 'Frontend\Auth::verifyUserEmail', ['as' => 'verify_user_email']);
 	$routes->match(['get', 'post'], 'register', 'Frontend\Auth::register', ['as' => 'register_page']);
 	$routes->match(['get', 'post'], 'recover', 'Frontend\Auth::recover', ['as' => 'recover_page']);
 
 	// $routes->post('get_city_by_state/(:num)', 'Global::get_city_by_state/$1');
 
 	$routes->match(['get', 'post'], 'help', 'Frontend\Common::help', ['as' => 'help_page']);
-	$routes->get('user/profile/(:segment)', 'Frontend\Public\User::profile', ['as' => 'public_profile_page']); // unique id
+	$routes->get('user/profile/(:segment)', 'Frontend\Publicdata::profile/$1', ['as' => 'public_profile_page']); // unique id
 
 	$routes->group('account', ['filter' => 'auth'], function ($routes) {
 		$routes->match(['get', 'post'], 'profile', 'Frontend\Account::account_profile', ['as' => 'account_profile']);
+		$routes->match(['get', 'post'], 'profile-edit', 'Frontend\Account::account_profile_edit', ['as' => 'account_profile_edit']);
+		$routes->match(['get', 'post'], 'verification', 'Frontend\Account::user_verification', ['as' => 'account_verification']);
 		$routes->match(['get', 'post'], 'inbox', 'Frontend\Account::account_inbox', ['as' => 'account_inbox']);
 		$routes->match(['get', 'post'], 'inbox/(:segment)', 'Frontend\Account::account_inbox/$1', ['as' => 'account_inbox_chat']);
 		$routes->match(['get', 'post'], 'alerts', 'Frontend\Account::account_alerts', ['as' => 'account_alerts']);

@@ -2,10 +2,10 @@
 
 namespace App\Controllers\Frontend;
 
-use CodeIgniter\Controller;
 use App\Models\Globals\FrontservicesModel;
+use App\Controllers\BaseController;
 
-class Services extends Controller
+class Services extends BaseController
 {
     public function singleService($slug = null)
     {
@@ -23,7 +23,6 @@ class Services extends Controller
 
         return view('Frontend/pages/singleService', $data);
     }
-
     public function singleServicePackages($slug = null)
     {
         helper('number');

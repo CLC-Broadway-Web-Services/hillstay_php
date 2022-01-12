@@ -6,7 +6,6 @@ use App\Controllers\BaseController;
 
 class Dashboard extends BaseController
 {
-
     protected $data;
     protected $admin;
 

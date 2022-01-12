@@ -2,10 +2,10 @@
 
 namespace App\Controllers\Admin;
 
-use CodeIgniter\Controller;
+use App\Controllers\BaseController;
 use App\Models\Admin\ListingModel;
 
-class ListingController extends Controller
+class ListingController extends BaseController
 {
 	protected $data;
 	protected $admin;

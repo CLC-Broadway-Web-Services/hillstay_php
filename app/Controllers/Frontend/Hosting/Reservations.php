@@ -8,9 +8,9 @@ use App\Models\Admin\Chatsystem;
 use App\Models\Admin\InboxModel;
 use App\Models\Admin\ListingModel;
 use App\Models\Admin\UserModel;
-use CodeIgniter\Controller;
+use App\Controllers\BaseController;
 
-class Reservations extends Controller
+class Reservations extends BaseController
 {
 	private $data;
 	private $listing_m;
@@ -18,14 +18,12 @@ class Reservations extends Controller
 	private $booking_guests_m;
 	private $inbox_m;
 	private $user_m;
-	private $session;
 
 	public function __construct()
 	{
 		$this->data = array();
-		$this->session = session();
-		$this->data['user_name'] = $this->session->get('firstName');
-		$this->data['user_id'] = $this->session->get('uid');
+		$this->data['user_name'] = session()->get('firstName');
+		$this->data['user_id'] = session()->get('uid');
 		$this->listing_m = new ListingModel();
 		$this->bookings_m = new BookingsModel();
 		$this->booking_guests_m = new BookingGuestModel();
@@ -37,7 +35,7 @@ class Reservations extends Controller
 	{
 		$host_id = $this->data['user_id'];
 		
-		$this->data['lastLogin'] = $this->session->get('lastLogin');
+		$this->data['lastLogin'] = session()->get('lastLogin');
 		$getParam = '';
 		if ($this->request->getMethod() == 'get' && $this->request->getVar('type')) {
 			$getParam = $this->request->getGet('type');

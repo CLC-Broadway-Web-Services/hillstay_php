@@ -2,247 +2,247 @@
 
 <?= $this->section('content'); ?>
 
-        <!-- Stats blocks -->
-        <div class="row">
+<!-- Stats blocks -->
+<div class="row">
 
-            <!-- Item -->
-            <div class="col-lg-3 col-md-6">
-                <div class="dashboard-stat color-1">
-                    <div class="dashboard-stat-content">
-                        <h4>6</h4> <span>Active Listings</span>
-                    </div>
-                    <div class="dashboard-stat-icon"><i class="im im-icon-Map2"></i></div>
-                </div>
+    <!-- Item -->
+    <div class="col-lg-3 col-md-6">
+        <div class="dashboard-stat color-4">
+            <div class="dashboard-stat-content">
+                <h4><?= $totalListings ?></h4> <span>Total Listings</span>
             </div>
-
-            <!-- Item -->
-            <div class="col-lg-3 col-md-6">
-                <div class="dashboard-stat color-2">
-                    <div class="dashboard-stat-content">
-                        <h4>726</h4> <span>Total Views</span>
-                    </div>
-                    <div class="dashboard-stat-icon"><i class="im im-icon-Line-Chart"></i></div>
-                </div>
-            </div>
-
-
-            <!-- Item -->
-            <div class="col-lg-3 col-md-6">
-                <div class="dashboard-stat color-3">
-                    <div class="dashboard-stat-content">
-                        <h4>95</h4> <span>Total Reviews</span>
-                    </div>
-                    <div class="dashboard-stat-icon"><i class="im im-icon-Add-UserStar"></i></div>
-                </div>
-            </div>
-
-            <!-- Item -->
-            <div class="col-lg-3 col-md-6">
-                <div class="dashboard-stat color-4">
-                    <div class="dashboard-stat-content">
-                        <h4>126</h4> <span>Times Bookmarked</span>
-                    </div>
-                    <div class="dashboard-stat-icon"><i class="im im-icon-Heart"></i></div>
-                </div>
-            </div>
+            <div class="dashboard-stat-icon"><i class="im im-icon-Map2"></i></div>
         </div>
+    </div>
 
-        <!-- Content blocks -->
-        <div class="row mb-5">
+    <!-- Item -->
+    <div class="col-lg-3 col-md-6">
+        <div class="dashboard-stat color-1">
+            <div class="dashboard-stat-content">
+                <h4><?= $activeListings ?></h4> <span>Active Listings</span>
+            </div>
+            <div class="dashboard-stat-icon"><i class="im im-icon-Map2"></i></div>
+        </div>
+    </div>
 
-            <div class="col-lg-8 col-md-12">
-                <!-- Requests with Filters  -->
-                <div class="dashboard-list-box margin-top-20">
+    <!-- Item -->
+    <div class="col-lg-3 col-md-6">
+        <div class="dashboard-stat color-2">
+            <div class="dashboard-stat-content">
+                <h4><?= $totalReservations ?></h4> <span>Total Reservations</span>
+            </div>
+            <div class="dashboard-stat-icon"><i class="im im-icon-Line-Chart"></i></div>
+        </div>
+    </div>
 
-                    <div class="booking-requests-filter">
+    <!-- Item -->
+    <div class="col-lg-3 col-md-6">
+        <div class="dashboard-stat color-3">
+            <div class="dashboard-stat-content">
+                <h4><?= $activeListings ?></h4> <span>Total Reviews</span>
+            </div>
+            <div class="dashboard-stat-icon"><i class="im im-icon-Add-UserStar"></i></div>
+        </div>
+    </div>
 
-                        <!-- Sort by -->
-                        <div class="sort-by">
-                            <div class="sort-by-select">
+</div>
 
-                                <select data-placeholder="Default order" class="chosen-select-no-single">
-                                    <option>All Listings</option>
-                                    <option>Burger House</option>
-                                    <option>Tom's Restaurant</option>
-                                    <option>Hotel Govendor</option>
-                                </select>
+<!-- Content blocks -->
+<div class="row mb-5">
 
-                            </div>
-                        </div>
+    <div class="col-lg-8 col-md-12">
+        <!-- Requests with Filters  -->
+        <div class="dashboard-list-box margin-top-20">
+
+            <!-- <div class="booking-requests-filter">
+
+                <div class="sort-by">
+                    <div class="sort-by-select">
+
+                        <select data-placeholder="Default order" class="chosen-select-no-single">
+                            <option>All Listings</option>
+                            <option>Burger House</option>
+                            <option>Tom's Restaurant</option>
+                            <option>Hotel Govendor</option>
+                        </select>
 
                     </div>
-
-                    <!-- Reply to review popup -->
-                    <div id="small-dialog" class="zoom-anim-dialog mfp-hide">
-                        <div class="small-dialog-header">
-                            <h3>Send Message</h3>
-                        </div>
-                        <div class="message-reply margin-top-0">
-                            <textarea cols="40" rows="3" placeholder="Your Message to Kathy"></textarea>
-                            <button class="button">Send</button>
-                        </div>
-                    </div>
-
-                    <h4>Requests</h4>
-                    <ul>
-
-                        <li class="pending-booking">
-                            <div class="list-box-listing bookings">
-                                <div class="list-box-listing-img"><img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=120" alt="">
-                                </div>
-                                <div class="list-box-listing-content">
-                                    <div class="inner">
-                                        <h3>Sunny and Modern Apartment <span class="booking-status pending">Pending</span><span class="booking-status unpaid">Unpaid</span></h3>
-
-                                        <div class="inner-booking-list">
-                                            <h5>Booking Date:</h5>
-                                            <ul class="booking-list">
-                                                <li class="highlighted">20.08.2018 - 24.08.2018</li>
-                                            </ul>
-                                        </div>
-
-                                        <div class="inner-booking-list">
-                                            <h5>Booking Details:</h5>
-                                            <ul class="booking-list">
-                                                <li class="highlighted">2 Adults</li>
-                                            </ul>
-                                        </div>
-
-                                        <div class="inner-booking-list">
-                                            <h5>Price:</h5>
-                                            <ul class="booking-list">
-                                                <li class="highlighted">$147</li>
-                                            </ul>
-                                        </div>
-
-                                        <div class="inner-booking-list">
-                                            <h5>Client:</h5>
-                                            <ul class="booking-list">
-                                                <li>John Smith</li>
-                                                <li><a href="http://www.vasterad.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bdd7d2d5d3fdd8c5dcd0cdd1d893ded2d0">[email&#160;protected]</a>
-                                                </li>
-                                                <li>123-456-789</li>
-                                            </ul>
-                                        </div>
-
-                                        <a href="#small-dialog" class="rate-review popup-with-zoom-anim"><i class="sl sl-icon-envelope-open"></i> Send Message</a>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="buttons-to-right">
-                                <a href="#" class="button gray reject"><i class="sl sl-icon-close"></i> Reject</a>
-                                <a href="#" class="button gray approve"><i class="sl sl-icon-check"></i> Approve</a>
-                            </div>
-                        </li>
-
-                    </ul>
                 </div>
-                <!-- Tips -->
-                <div class="dashboard-list-box with-icons margin-top-20">
-                    <h4>Tips</h4>
-                    <ul>
-                        <li>
-                            <i class="list-box-icon sl sl-icon-layers"></i> Your listing <strong><a href="#">Hotel
-                                    Govendor</a></strong>
-                            has been approved!
-                            <a href="#" class="close-list-item"><i class="fa fa-close"></i></a>
-                        </li>
 
-                        <li>
-                            <i class="list-box-icon sl sl-icon-star"></i> Kathy Brown left a review <div class="numerical-rating high">5.0</div> on <strong><a href="#">Burger House</a></strong>
-                            <a href="#" class="close-list-item"><i class="fa fa-close"></i></a>
-                        </li>
+            </div> -->
 
-                        <li>
-                            <i class="list-box-icon sl sl-icon-heart"></i> Someone bookmarked your <strong><a href="#">Burger
-                                    House</a></strong> listing!
-                            <a href="#" class="close-list-item"><i class="fa fa-close"></i></a>
-                        </li>
-                    </ul>
+            <!-- Reply to review popup -->
+            <div id="small-dialog" class="zoom-anim-dialog mfp-hide">
+                <div class="small-dialog-header">
+                    <h3>Send Message</h3>
                 </div>
-                <!-- Reservations with Filters  -->
-                <div class="dashboard-list-box margin-top-20">
-
-                    <div class="booking-requests-filter">
-
-                        <!-- Sort by -->
-                        <div class="sort-by">
-                            <div class="sort-by-select">
-                                <select data-placeholder="Default order" class="chosen-select-no-single">
-                                    <option>All Listings</option>
-                                    <option>Burger House</option>
-                                    <option>Tom's Restaurant</option>
-                                    <option>Hotel Govendor</option>
-                                </select>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <!-- Reply to review popup -->
-                    <div id="small-dialog" class="zoom-anim-dialog mfp-hide">
-                        <div class="small-dialog-header">
-                            <h3>Send Message</h3>
-                        </div>
-                        <div class="message-reply margin-top-0">
-                            <textarea cols="40" rows="3" placeholder="Your Message to Kathy"></textarea>
-                            <button class="button">Send</button>
-                        </div>
-                    </div>
-
-                    <h4>Reservations</h4>
-                    <ul>
-
-                        <li class="approved-booking">
-                            <div class="list-box-listing bookings">
-                                <div class="list-box-listing-img"><img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=120" alt="">
-                                </div>
-                                <div class="list-box-listing-content">
-                                    <div class="inner">
-                                        <h3>Burger House <span class="booking-status">Approved</span></h3>
-
-                                        <div class="inner-booking-list">
-                                            <h5>Booking Date:</h5>
-                                            <ul class="booking-list">
-                                                <li class="highlighted">10.12.2019 at 12:30 pm - 13:30 pm</li>
-                                            </ul>
-                                        </div>
-
-                                        <div class="inner-booking-list">
-                                            <h5>Booking Details:</h5>
-                                            <ul class="booking-list">
-                                                <li class="highlighted">2 Adults, 2 Children</li>
-                                            </ul>
-                                        </div>
-
-                                        <div class="inner-booking-list">
-                                            <h5>Client:</h5>
-                                            <ul class="booking-list">
-                                                <li>Kathy Brown</li>
-                                                <li><a href="http://www.vasterad.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="573c36233f2e17322f363a273b327934383a">[email&#160;protected]</a>
-                                                </li>
-                                                <li>123-456-789</li>
-                                            </ul>
-                                        </div>
-
-                                        <a href="#small-dialog" class="rate-review popup-with-zoom-anim"><i class="sl sl-icon-envelope-open"></i> Send Message</a>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="buttons-to-right">
-                                <a href="#" class="button gray reject"><i class="sl sl-icon-close"></i> Cancel</a>
-                            </div>
-                        </li>
-
-                    </ul>
+                <div class="message-reply margin-top-0">
+                    <textarea cols="40" rows="3" placeholder="Your Message to Kathy"></textarea>
+                    <button class="button">Send</button>
                 </div>
             </div>
 
-            <!-- Invoices -->
-            <div class="col-lg-4 col-md-12">
-                <div class="dashboard-list-box invoices with-icons margin-top-20">
+            <h4>Latest Requests</h4>
+            <ul>
+
+                <?php
+                // echo '<pre>';
+                // print_r($booking);
+                // echo '</pre>';
+                ?>
+                <li class="pending-booking">
+                    <div class="list-box-listing bookings">
+                        <div class="list-box-listing-img"><img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=120" alt="">
+                        </div>
+                        <div class="list-box-listing-content">
+                            <div class="inner">
+                                <h3><?= $booking['listing']['title'] ?> <span class="booking-status pending">Pending Action</span><span class="booking-status unpaid">Unpaid</span></h3>
+
+                                <div class="inner-booking-list">
+                                    <h5>Booking Date:</h5>
+                                    <ul class="booking-list">
+                                        <li class="highlighted"><?= date('d.M.Y', strtotime($booking['check_in'])) ?> to <?= date('d.M.Y', strtotime($booking['check_out'])) ?></li>
+                                    </ul>
+                                </div>
+
+                                <div class="inner-booking-list">
+                                    <h5>Booking Details:</h5>
+                                    <ul class="booking-list">
+                                        <?php if ($booking['guest_adults']) : ?>
+                                            <li class="highlighted"><?= $booking['guest_adults'] ?> Adults</li>
+                                        <?php endif; ?>
+                                        <?php if ($booking['guest_chldren']) : ?>
+                                            <li class="highlighted"><?= $booking['guest_chldren'] ?> Kids</li>
+                                        <?php endif; ?>
+                                        <?php if ($booking['guest_infants']) : ?>
+                                            <li class="highlighted"><?= $booking['guest_infants'] ?> Infants</li>
+                                        <?php endif; ?>
+                                    </ul>
+                                </div>
+
+                                <div class="inner-booking-list">
+                                    <h5>Price:</h5>
+                                    <ul class="booking-list">
+                                        <li class="highlighted"><?= number_to_currency($booking['price_total'], 'INR') ?></li>
+                                    </ul>
+                                </div>
+
+                                <a href="<?= route_to('hosting_dashboard_reservations') ?>" class="rate-review">View All Requests</a>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="buttons-to-right">
+                        <a href="<?= route_to('hosting_dashboard_reservations_reject') ?>" class="button gray reject"><i class="sl sl-icon-close"></i> Reject</a>
+                        <a href="<?= route_to('hosting_dashboard_reservations_approve') ?>" class="button gray approve"><i class="sl sl-icon-check"></i> Approve</a>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+        <!-- Reservations with Filters  -->
+        <!-- <div class="dashboard-list-box margin-top-20">
+
+            <div class="booking-requests-filter">
+
+                <div class="sort-by">
+                    <div class="sort-by-select">
+                        <select data-placeholder="Default order" class="chosen-select-no-single">
+                            <option>All Listings</option>
+                            <option>Burger House</option>
+                            <option>Tom's Restaurant</option>
+                            <option>Hotel Govendor</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="small-dialog" class="zoom-anim-dialog mfp-hide">
+                <div class="small-dialog-header">
+                    <h3>Send Message</h3>
+                </div>
+                <div class="message-reply margin-top-0">
+                    <textarea cols="40" rows="3" placeholder="Your Message to Kathy"></textarea>
+                    <button class="button">Send</button>
+                </div>
+            </div>
+
+            <h4>Reservations</h4>
+            <ul>
+
+                <li class="approved-booking">
+                    <div class="list-box-listing bookings">
+                        <div class="list-box-listing-img"><img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=120" alt="">
+                        </div>
+                        <div class="list-box-listing-content">
+                            <div class="inner">
+                                <h3>Burger House <span class="booking-status">Approved</span></h3>
+
+                                <div class="inner-booking-list">
+                                    <h5>Booking Date:</h5>
+                                    <ul class="booking-list">
+                                        <li class="highlighted">10.12.2019 at 12:30 pm - 13:30 pm</li>
+                                    </ul>
+                                </div>
+
+                                <div class="inner-booking-list">
+                                    <h5>Booking Details:</h5>
+                                    <ul class="booking-list">
+                                        <li class="highlighted">2 Adults, 2 Children</li>
+                                    </ul>
+                                </div>
+
+                                <div class="inner-booking-list">
+                                    <h5>Client:</h5>
+                                    <ul class="booking-list">
+                                        <li>Kathy Brown</li>
+                                        <li><a href="http://www.vasterad.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="573c36233f2e17322f363a273b327934383a">[email&#160;protected]</a>
+                                        </li>
+                                        <li>123-456-789</li>
+                                    </ul>
+                                </div>
+
+                                <a href="#small-dialog" class="rate-review popup-with-zoom-anim"> View All</a>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="buttons-to-right">
+                        <a href="#" class="button gray reject"><i class="sl sl-icon-close"></i> Cancel</a>
+                    </div>
+                </li>
+
+            </ul>
+        </div> -->
+    </div>
+
+    <!-- Invoices -->
+    <div class="col-lg-4 col-md-12">
+        <!-- Notifications -->
+        <div class="dashboard-list-box with-icons margin-top-20">
+            <h4>Notifications</h4>
+            <ul>
+                <li>
+                    <i class="list-box-icon sl sl-icon-layers"></i> Your listing <strong>
+                        <a href="#">Hotel Govendor</a></strong>
+                    has been approved!
+                    <a href="#" class="close-list-item"><i class="fa fa-close"></i></a>
+                </li>
+
+                <li>
+                    <i class="list-box-icon sl sl-icon-star"></i> Kathy Brown left a review <div class="numerical-rating high">5.0</div> on <strong><a href="#">Burger House</a></strong>
+                    <a href="#" class="close-list-item"><i class="fa fa-close"></i></a>
+                </li>
+
+                <li>
+                    <i class="list-box-icon sl sl-icon-heart"></i> Someone bookmarked your <strong><a href="#">Burger
+                            House</a></strong> listing!
+                    <a href="#" class="close-list-item"><i class="fa fa-close"></i></a>
+                </li>
+            </ul>
+        </div>
+        <!-- <div class="dashboard-list-box invoices with-icons margin-top-20">
                     <h4>Invoices</h4>
                     <ul>
 
@@ -295,11 +295,10 @@
                         </li>
 
                     </ul>
-                </div>
-            </div>
+                </div> -->
+    </div>
 
-        </div>
-
+</div>
 
 <!-- <style>
     .preloader {

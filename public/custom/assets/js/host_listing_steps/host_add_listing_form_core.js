@@ -17,7 +17,6 @@ function _previousStep() {
 _listingForm.submit(function (event) {
     event.preventDefault();
     // return;
-    loader.removeAttr('hidden');
     var formData = new FormData(_listingForm[0]);
 
     formData.append('request_type', 'ajax');
@@ -33,9 +32,9 @@ _listingForm.submit(function (event) {
 
         // console.log(formData.get('cover'));
         if(!formData.get('cover')) {
-            alert("Please make an image as cover first");
             loader.attr('hidden');
-            return false;
+            alert("Please make an image as cover first");
+            return;
         }
 
 
@@ -44,7 +43,7 @@ _listingForm.submit(function (event) {
         console.log(tinymceValidation());
         if (tinymceValidation() == false) {
             window.location.href += '#';
-            return false;
+            return;
         }
     }
     if (_step == 22) {
@@ -63,6 +62,7 @@ _listingForm.submit(function (event) {
     // return;
     if (_listingForm.valid()) {
 
+        loader.removeAttr('hidden');
         $.ajax({
             url: window.location.href,
             type: "post",
@@ -77,6 +77,7 @@ _listingForm.submit(function (event) {
                 console.log(lastid)
                 if (lastid > 0) {
                     href.searchParams.set("step", (_step + 1));
+                    href.searchParams.set("id", (lastid));
                     console.log(href.toString());
                     window.location.href = href.toString();
                 }

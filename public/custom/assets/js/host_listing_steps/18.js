@@ -16,7 +16,7 @@ function addmaxNight() {
     if (parseInt(nightsmin.val()) > parseInt(nightsmax.val())) {
         nightsmax.val(parseInt(nightsmin.val()) + 1);
     } else {
-        nightsmax.val(parseInt(nightsmin.val()) + 1);
+        nightsmax.val(parseInt(nightsmax.val()) + 1);
     }
 }
 function removemaxNight() {
