@@ -16,48 +16,48 @@
 				<div class="mega-menu-section">
 					<ul>
 						<li class="mega-menu-headline">Hill Stations</li>
-						<li><a routerLink="#">Nainital</a></li>
-						<li><a routerLink="#">Chopta</a></li>
-						<li><a routerLink="#">Manali</a></li>
-						<li><a routerLink="#">Shimla</a></li>
-						<li><a routerLink="#">Mussoorie</a></li>
+						<li><a href="#">Nainital</a></li>
+						<li><a href="#">Chopta</a></li>
+						<li><a href="#">Manali</a></li>
+						<li><a href="#">Shimla</a></li>
+						<li><a href="#">Mussoorie</a></li>
 					</ul>
 				</div>
 				<div class="mega-menu-section">
 					<ul>
 						<li class="mega-menu-headline">Browse</li>
-						<li><a routerLink="#">off-Beat</a></li>
-						<li><a routerLink="#">Cottages</a></li>
-						<li><a routerLink="#">Camps</a></li>
-						<li><a routerLink="#">Villas</a></li>
-						<li><a routerLink="#">Appartments</a></li>
-						<li><a routerLink="#">Hostels</a></li>
+						<li><a href="#">off-Beat</a></li>
+						<li><a href="#">Cottages</a></li>
+						<li><a href="#">Camps</a></li>
+						<li><a href="#">Villas</a></li>
+						<li><a href="#">Appartments</a></li>
+						<li><a href="#">Hostels</a></li>
 					</ul>
 				</div>
 				<div class="mega-menu-section">
 					<ul>
 						<li class="mega-menu-headline">Helpful Links</li>
-						<li><a routerLink="#">How it Works</a></li>
-						<li><a routerLink="#">About us</a></li>
-						<li><a routerLink="#">FAQ</a></li>
-						<li><a routerLink="#">Pricing</a></li>
-						<li><a routerLink="#">Contact us</a></li>
+						<li><a href="<?= route_to('how_it_works') ?>">How it Works</a></li>
+						<li><a href="<?= route_to('about_us') ?>">About us</a></li>
+						<li><a href="<?= route_to('faq') ?>">FAQ</a></li>
+						<li><a href="<?= route_to('pricing') ?>">Pricing</a></li>
+						<li><a href="<?= route_to('contact_us') ?>">Contact us</a></li>
 					</ul>
 				</div>
 			</div>
 		</li>
 
-		<li><a routerLink="/stories">Stories</a>
+		<li><a href="/stories">Stories</a>
 			<ul>
-				<li><a routerLink="#">Nature Walks</a></li>
-				<li><a routerLink="#">Birds watching</a></li>
-				<li><a routerLink="#">Adventure</a></li>
+				<li><a href="#">Nature Walks</a></li>
+				<li><a href="#">Birds watching</a></li>
+				<li><a href="#">Adventure</a></li>
 			</ul>
 		</li>
-		<li><a routerLink="/stories">Culture</a>
+		<li><a href="/stories">Culture</a>
 			<ul>
-				<li><a routerLink="#">Organic Farming</a></li>
-				<li><a routerLink="#">Kumaoni Cuisine</a></li>
+				<li><a href="#">Organic Farming</a></li>
+				<li><a href="#">Kumaoni Cuisine</a></li>
 			</ul>
 		</li>
 

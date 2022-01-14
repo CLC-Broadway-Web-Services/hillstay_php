@@ -39,6 +39,11 @@ $routes->group('/', function ($routes) {
 	$routes->match(['get', 'post'], 'email-verification', 'Frontend\Auth::verifyUserEmail', ['as' => 'verify_user_email']);
 	$routes->match(['get', 'post'], 'register', 'Frontend\Auth::register', ['as' => 'register_page']);
 	$routes->match(['get', 'post'], 'recover', 'Frontend\Auth::recover', ['as' => 'recover_page']);
+	$routes->match(['get', 'post'], 'contact-us', 'Frontend\Hillstay::contact_us', ['as' => 'contact_us']);
+	$routes->match(['get', 'post'], 'about-us', 'Frontend\Hillstay::about_us', ['as' => 'about_us']);
+	$routes->match(['get', 'post'], 'faq', 'Frontend\Hillstay::faq', ['as' => 'faq']);
+	$routes->match(['get', 'post'], 'pricing', 'Frontend\Hillstay::pricing', ['as' => 'pricing']);
+	$routes->match(['get', 'post'], 'how-it-works', 'Frontend\Hillstay::how_it_works', ['as' => 'how_it_works']);
 
 	// $routes->post('get_city_by_state/(:num)', 'Global::get_city_by_state/$1');
 
