@@ -176,7 +176,7 @@
             <div class="row">
 
                 <!-- Listing Item -->
-                <div class="col-lg-3 col-md-4  col-sm-6">
+                <!-- <div class="col-lg-3 col-md-4  col-sm-6">
                     <a href="listings-single-page.html" class="listing-item-container compact">
                         <div class="listing-item">
                             <img src="images/listing-item-01.jpg" alt="">
@@ -191,32 +191,39 @@
                             <span class="like-icon"></span>
                         </div>
                     </a>
-                </div>
+                </div> -->
                 <!-- Listing Item / End -->
 
                 <!-- Listing Item -->
+                <?php 
+               
+                foreach($searchList as $list) :
+                    // return print_r($list);
+                    
+                    ?>
                 <div class="col-lg-3 col-md-4  col-sm-6">
                     <a href="listings-single-page.html" class="listing-item-container compact">
                         <div class="listing-item">
-                            <img src="images/listing-item-02.jpg" alt="">
+                            <img src="<?= $list['coverimage'] ?>" alt="">
                             <div class="listing-item-details">
                                 <ul>
-                                    <li>Friday, August 10</li>
+                                    <li>Starting from <?= $list['price'] ?></li>
                                 </ul>
                             </div>
                             <div class="listing-item-content">
                                 <div class="numerical-rating" data-rating="5.0"></div>
-                                <h3>Sticky Band</h3>
-                                <span>Bishop Avenue, New York</span>
+                                <h3><?= $list['title'] ?></h3>
+                                <span><?= $list['location'] ?></span>
                             </div>
                             <span class="like-icon"></span>
                         </div>
                     </a>
                 </div>
+                <?php endforeach; ?>
                 <!-- Listing Item / End -->
 
                 <!-- Listing Item -->
-                <div class="col-lg-3 col-md-4  col-sm-6">
+                <!-- <div class="col-lg-3 col-md-4  col-sm-6">
                     <a href="listings-single-page.html" class="listing-item-container compact">
                         <div class="listing-item">
                             <img src="images/listing-item-03.jpg" alt="">
@@ -238,7 +245,7 @@
                 <!-- Listing Item / End -->
 
                 <!-- Listing Item -->
-                <div class="col-lg-3 col-md-4  col-sm-6">
+                <!-- <div class="col-lg-3 col-md-4  col-sm-6">
                     <a href="listings-single-page.html" class="listing-item-container compact">
                         <div class="listing-item">
                             <img src="images/listing-item-04.jpg" alt="">
@@ -253,11 +260,11 @@
                             <span class="like-icon"></span>
                         </div>
                     </a>
-                </div>
+                </div> -->
                 <!-- Listing Item / End -->
 
                 <!-- Listing Item -->
-                <div class="col-lg-3 col-md-4  col-sm-6">
+                <!-- <div class="col-lg-3 col-md-4  col-sm-6">
                     <a href="listings-single-page.html" class="listing-item-container compact">
                         <div class="listing-item">
                             <img src="images/listing-item-05.jpg" alt="">
@@ -269,11 +276,11 @@
                             <span class="like-icon"></span>
                         </div>
                     </a>
-                </div>
+                </div> -->
                 <!-- Listing Item / End -->
 
                 <!-- Listing Item -->
-                <div class="col-lg-3 col-md-4  col-sm-6">
+                <!-- <div class="col-lg-3 col-md-4  col-sm-6">
                     <a href="listings-single-page.html" class="listing-item-container compact">
                         <div class="listing-item">
                             <img src="images/listing-item-06.jpg" alt="">
@@ -288,7 +295,7 @@
                             <span class="like-icon"></span>
                         </div>
                     </a>
-                </div>
+                </div> --> 
                 <!-- Listing Item / End -->
 
             </div>

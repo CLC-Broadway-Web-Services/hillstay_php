@@ -33,27 +33,20 @@
 ================================================== -->
 <div class="container">
     <div class="row">
-
-
         <div class="col-md-12">
             <div class="row">
-
                 <!-- Listing Item -->
                 <div class="col-lg-12 col-md-12">
                     <div class="listing-item-container list-layout">
-                        <a href="listings-single-page.html" class="listing-item">
+                        <a href="#" class="listing-item">
 
                             <!-- Content -->
                             <div class="listing-item-content">
 
                                 <div class="listing-item-inner">
-                                    <h3>In Himachal Pradesh, when does it snow? <i class="verified-icon"></i></h3>
-                                    <span>The winter season in Himachal Pradesh lasts from November to March,
-                                        with December and January being the coldest months with the most snowfall.
-                                        In March, if you're lucky, you could get a chance to see some snow.</span>
-                                    <div class="star-rating" data-rating="3.5">
-                                        <div class="rating-counter">(12 reviews)</div>
-                                    </div>
+                                    <h3>Question: What is hillstay Tours? <i class="verified-icon"></i></h3>
+                                    <span>Answer: hillstay Tours is a Travel Agency based out of Cannaught Place, New Delhi India, Established in 1995, Recognized by all Tourism Apex bodies, affiliated with Department of Tourism, Government of India. hillstay Tours is an authorized seller of Premium chain hotels such as Taj, Oberois, ITC, Starwood, Hilton, Marriott, Lemon Tree and many more. We cater to all needs of the travelers like 3,4 or 5 Star Hotels, private cabs, Coach travel, English Speaking Drivers , Guides as well as niche demands like Senior Citizen Tours, Women only Tours ,Wildlife Expeditions , Photography Tours , Customized Honeymoon Tours, etc.</span>
+                                  
                                 </div>
                             </div>
                         </a>
@@ -64,19 +57,15 @@
                 <!-- Listing Item -->
                 <div class="col-lg-12 col-md-12">
                     <div class="listing-item-container list-layout">
-                        <a href="listings-single-page.html" class="listing-item">
+                        <a href="#" class="listing-item">
 
                             <!-- Content -->
                             <div class="listing-item-content">
 
                                 <div class="listing-item-inner">
-                                    <h3>Himachal Pradesh is served by which airport? <i class="verified-icon"></i></h3>
-                                    <span>Himachal Pradesh is served by three airports: Bhuntar Airport in the Kullu-Manali district;
-                                        Kangra Airport or Gaggal Airport in Gaggal, in Himachal Pradesh's Kangra district;
-                                        and Jubbarbhatti Airport in Shimla.</span>
-                                    <div class="star-rating" data-rating="3.5">
-                                        <div class="rating-counter">(12 reviews)</div>
-                                    </div>
+                                    <h3>Question: Why should I trust you?<i class="verified-icon"></i></h3>
+                                    <span>Answer: hillstay Tours has been operating since 1995, The guest feedback for hillstay Tours is excellent (Refer to the testimonials), On securing a tour with us, We provide the guest with a payment flexibility where only a token advance is to be paid to process the reservation, balance payment can be remitted after we provide the confirmations from the hotel / hotels.</span>
+                                  
                                 </div>
                             </div>
                         </a>
@@ -87,19 +76,15 @@
                 <!-- Listing Item -->
                 <div class="col-lg-12 col-md-12">
                     <div class="listing-item-container list-layout">
-                        <a href="listings-single-page.html" class="listing-item">
+                        <a href="#" class="listing-item">
 
                             <!-- Content -->
                             <div class="listing-item-content">
 
                                 <div class="listing-item-inner">
-                                    <h3>What are some interesting spots to visit in Himachal Pradesh?<i class="verified-icon"></i></h3>
-                                    <span>Kullu, Manali, Spiti Valley, Tosh, Malana, Grahan, Parvati Valley, Shimla, Dalhousie, Dharamshala, McLeodgunj, Khajjiar, Shimla, and
-                                        many more. Check out our Himachal tour packages at Thomas Cook India
-                                        to help you decide where to travel and what to see.</span>
-                                    <div class="star-rating" data-rating="3.5">
-                                        <div class="rating-counter">(12 reviews)</div>
-                                    </div>
+                                    <h3>Question: How much would I pay upfront?<i class="verified-icon"></i></h3>
+                                    <span>Answer: Based on the discussion with your Travel Counselor, you have to pay 10% - 25% of your Total Trip amount to process the reservation. The balance amount can be paid after receiving the Travel vouchers.</span>
+                                  
                                 </div>
                             </div>
                         </a>
@@ -110,17 +95,15 @@
                 <!-- Listing Item -->
                 <div class="col-lg-12 col-md-12">
                     <div class="listing-item-container list-layout">
-                        <a href="listings-single-page.html" class="listing-item">
+                        <a href="#" class="listing-item">
 
                             <!-- Content -->
                             <div class="listing-item-content">
 
                                 <div class="listing-item-inner">
-                                    <h3>How much is the distance between Delhi and McLeodganj?<i class="verified-icon"></i></h3>
-                                    <span>The distance between Delhi and McLeodganj is 478 kilometers, and it takes about 10 hours to travel by car.</span>
-                                    <div class="star-rating" data-rating="3.5">
-                                        <div class="rating-counter">(12 reviews)</div>
-                                    </div>
+                                    <h3>Question: What are the supported modes of payment you accept?<i class="verified-icon"></i></h3>
+                                    <span>Answer: You can pay via Bank Transfers, Cheques or in cash. We accept all Visa, MasterCard and American Express credit cards and most major debit cards which are subject to 2.5% processing fee.</span>
+                                   
                                 </div>
                             </div>
                         </a>
@@ -131,48 +114,32 @@
                 <!-- Listing Item -->
                 <div class="col-lg-12 col-md-12">
                     <div class="listing-item-container list-layout">
-                        <a href="listings-single-page.html" class="listing-item">
+                        <a href="#" class="listing-item">
 
                             <!-- Content -->
                             <div class="listing-item-content">
 
                                 <div class="listing-item-inner">
-                                    <h3>What is the duration of the trek to Kheerganga?<i class="verified-icon"></i></h3>
-                                    <span>Kheerganga, located in Himachal Pradesh's Parvati Valley, offers visitors
-                                        the chance to learn about the Parvati Valley's unique culture
-                                        and stunning green beauty. The Kheerganga trip is an easy-moderate
-                                        level hike that lasts 2-3 days and covers around 12 kilometers.</span>
-                                    <div class="star-rating" data-rating="3.5">
-                                        <div class="rating-counter">(12 reviews)</div>
-                                    </div>
+                                    <h3>Question: What is your cancellation policy?<i class="verified-icon"></i></h3>
+                                    <span>Answer: Since we customize packages as per your demands, the cancellation policy varies across hotels and services. However, you're informed about the detailed cancellation policy before you make any payments</span>
+                                  
                                 </div>
                             </div>
                         </a>
                     </div>
                 </div>
                 <!-- Listing Item / End -->
-
                 <!-- Listing Item -->
                 <div class="col-lg-12 col-md-12">
                     <div class="listing-item-container list-layout">
-                        <a href="listings-single-page.html" class="listing-item">
+                        <a href="#" class="listing-item">
 
                             <!-- Content -->
                             <div class="listing-item-content">
 
                                 <div class="listing-item-inner">
-                                    <h3>How long should I spend in Himachal Pradesh?<i class="verified-icon"></i></h3>
-                                    <span>Traveling and exploring the state of Himachal should take at least 8-10 days.
-                                        It's a large state with many little towns, villages, isolated regions,
-                                        and booming cities, as well as sightseeing and adventure options.
-                                        If you want to take a complete tour of Himachal, it will take you
-                                        anywhere from 30 days to six months, depending on your budget and
-                                        how much time you want to spend at each place. The state's most
-                                        prominent tourist destinations include Shimla, Manali, Dharamshala,
-                                        and Dalhousie.</span>
-                                    <div class="star-rating" data-rating="3.5">
-                                        <div class="rating-counter">(12 reviews)</div>
-                                    </div>
+                                    <h3>Question: What if I face any issues during the Tour?<i class="verified-icon"></i></h3>
+                                    <span>Answer: There would be a dedicated Travel Counselor assigned exclusively to you, who would be in touch with you from the time when the query was initiated till the time the tour ends, In case of any issues faced by you, a solution would be immediately offered, still unsatisfied you can escalate the call to our Director, Mr. Gaurav Chawla - Mobile No. 98101-00293. The Hotels, Transport and the services used by us are tried and tested for over 25 years.</span>
                                 </div>
                             </div>
                         </a>
@@ -184,21 +151,7 @@
 
             <!-- Pagination -->
             <div class="clearfix"></div>
-            <div class="row">
-                <div class="col-md-12">
-                    <!-- Pagination -->
-                    <div class="pagination-container margin-top-20 margin-bottom-40">
-                        <nav class="pagination">
-                            <ul>
-                                <li><a href="#" class="current-page">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#"><i class="sl sl-icon-arrow-right"></i></a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-            </div>
+          
             <!-- Pagination / End -->
 
         </div>

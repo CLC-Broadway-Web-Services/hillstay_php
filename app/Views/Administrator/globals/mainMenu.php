@@ -62,7 +62,7 @@
             <a href="<?= route_to('admin_all_listing') ?>" class="nk-menu-link"><span class="nk-menu-text">Listings</span></a>
         </li>
         <li class="nk-menu-item">
-            <a href="<?= route_to('admin_all_listing') ?>" class="nk-menu-link"><span class="nk-menu-text">Add Listing</span></a>
+            <a href="<?= route_to('admin_save_listing') ?>" class="nk-menu-link"><span class="nk-menu-text">Add Listing</span></a>
         </li>
         <!-- <li class="nk-menu-item">
             <a href="/administrator/blog/categories" class="nk-menu-link"><span class="nk-menu-text">Categories</span></a>

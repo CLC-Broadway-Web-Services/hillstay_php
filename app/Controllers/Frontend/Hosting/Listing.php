@@ -1434,7 +1434,7 @@ class Listing extends BaseController
 		// }
 
 		// unset($data['additoinal_rules']);
-		if(isset($data['additoinal_rules'])) {
+		if (isset($data['additoinal_rules'])) {
 			$data['additoinal_rules'] = json_encode($data['additoinal_rules']);
 		} else {
 			$data['additoinal_rules'] = null;
@@ -1594,5 +1594,28 @@ class Listing extends BaseController
 	}
 	private function saveStep23($data)
 	{
+	}
+	public function publish_status()
+	{
+
+		// return print_r($this->request->getVar('id'));
+		$id = $this->request->getVar('id');
+		$publish = $this->request->getVar('publish');
+
+		$getData = $this->listing_m->find($id);
+		// return json_encode(print_r($getData));
+		if ($getData) {
+			if ($getData['published'] == 1) {
+				$getData['published'] = 0;
+			}else{
+				$getData['published'] = 1;
+			}
+			// return json_encode(print_r($getData));
+			$query = $this->listing_m->set($getData)->where("listing_id", $id)->update();
+				if ($query) {
+					$returnResponse['success'] = true;
+				}
+		//  $this->listing_m->update($getData);
+		}
 	}
 }

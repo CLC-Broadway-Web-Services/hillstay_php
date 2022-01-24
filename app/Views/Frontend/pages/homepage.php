@@ -8,7 +8,7 @@
 
 		<div class="container">
 			<div class="row">
-				<form class="col-md-12" id="searchFrom">
+				<form class="col-md-12" id="searchFrom" action="<?= route_to('searchPage') ?>">
 					<h2 class="font-weight-bold text-primary2">
 						Find Nearby <span class="typed-words"></span>
 					</h2>
@@ -20,7 +20,7 @@
 
 						<div class="main-search-input-item location">
 							<div id="autocomplete-container">
-								<input id="autocomplete-input" autocomplete type="text" placeholder="Location">
+								<input id="autocomplete-input" autocomplete type="text" name="location" placeholder="Location">
 							</div>
 							<a><i class="fa fa-map-marker"></i></a>
 						</div>
@@ -58,7 +58,7 @@
 							</div>
 						</div>
 
-						<button class="button" routerLink="#">Search</button>
+						<button type="submit" class="button" routerLink="#">Search</button>
 
 					</div>
 				</form>

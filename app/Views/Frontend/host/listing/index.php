@@ -61,11 +61,11 @@
                             <td>
                                 <?php if ($listing['status']) { ?>
                                     <label class="switch">
-                                        <input type="checkbox" checked>
+                                        <input type="checkbox" onchange="changePublishStatus('<?= $listing['listing_id'] ?>')" <?= $listing['published'] == 1 ? 'checked' : '' ?>>
                                         <span class="slider round"></span>
                                     </label>
-                                <?php } else { 
-                                    echo 'Not Activated';
+                                <?php } else {
+                                    echo 'not active';
                                 } ?>
                             </td>
                             <td>
@@ -104,4 +104,24 @@
         line-height: 25px
     }
 </style>
+<?= $this->endSection(); ?>
+
+<?= $this->section('footerScripts') ?>
+<script>
+    function changePublishStatus(listing_id) {
+        console.log(listing_id);
+        $.ajax({
+            type: 'POST',
+            url: '<?= base_url(route_to('hosting_listing_publish_status')) ?>',
+            data: {
+                publish: 'publish',
+                id: listing_id
+            },
+            success: function(result) {
+                console.log(result)
+                // location.reload();
+            },
+        });
+    }
+</script>
 <?= $this->endSection(); ?>

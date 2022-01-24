@@ -22,8 +22,8 @@
             <div class="office-address">
                 <h3>Our Office</h3>
                 <ul>
-                    <li>John Street 304</li>
-                    <li>New York</li>
+                    <li>G-79, Abul Fazal, Enclave-II </li>
+                    <li>Kalandi Kunj Road, New Delhi</li>
                     <li>Phone (123) 123-456 </li>
                 </ul>
             </div>
@@ -51,13 +51,13 @@
 
             <!-- Contact Details -->
             <div class="sidebar-textbox">
-                <p>Collaboratively administrate channels whereas virtual. Objectively seize scalable metrics whereas proactive e-services.</p>
+                <p>To travel is to live, and so we believe in at Hillstay Tours, We complete 20 successful years in the travel industry<a href="<?= route_to('about_us') ?>"> read more...</a></p>
 
                 <ul class="contact-details">
-                    <li><i class="im im-icon-Phone-2"></i> <strong>Phone:</strong> <span>(123) 123-456 </span></li>
+                    <li><i class="im im-icon-Phone-2"></i> <strong>Phone:</strong><a href="tel:+91 1234567891"> <span>(123) 123-456 </span></a></li>
                     <li><i class="im im-icon-Fax"></i> <strong>Fax:</strong> <span>(123) 123-456 </span></li>
                     <li><i class="im im-icon-Globe"></i> <strong>Web:</strong> <span><a href="#">www.example.com</a></span></li>
-                    <li><i class="im im-icon-Envelope"></i> <strong>E-Mail:</strong> <span><a href="#"><span class="__cf_email__" data-cfemail="a2cdc4c4cbc1c7e2c7dac3cfd2cec78cc1cdcf">[email&#160;protected]</span></a></span></li>
+                    <li><i class="im im-icon-Envelope"></i> <strong>E-Mail:</strong> <span><a href="mailto:info@hillstay.in"><span class="__cf_email__" data-cfemail="a2cdc4c4cbc1c7e2c7dac3cfd2cec78cc1cdcf">info@hillstay.in</span></a></span></li>
                 </ul>
             </div>
 

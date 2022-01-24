@@ -11,16 +11,16 @@
 <nav id="navigation" class="style-1">
 	<ul id="responsive">
 		<li><a href="<?= route_to('home_page') ?>">Home</a></li>
-		<li><a href="#">Hillstays</a>
+		<li><a href="javascript:void(0);">Hillstays</a>
 			<div class="mega-menu mobile-styles three-columns">
 				<div class="mega-menu-section">
 					<ul>
 						<li class="mega-menu-headline">Hill Stations</li>
-						<li><a href="#">Nainital</a></li>
-						<li><a href="#">Chopta</a></li>
-						<li><a href="#">Manali</a></li>
-						<li><a href="#">Shimla</a></li>
-						<li><a href="#">Mussoorie</a></li>
+						<li><a href="<?= route_to('searchPage'),'?location=nanital' ?>">Nainital</a></li>
+						<li><a href="<?= route_to('searchPage'),'?location=chopta' ?>">Chopta</a></li>
+						<li><a href="<?= route_to('searchPage'),'?location=manali' ?>">Manali</a></li>
+						<li><a href="<?= route_to('searchPage'),'?location=shimla' ?>">Shimla</a></li>
+						<li><a href="<?= route_to('searchPage'),'?location=mussoori' ?>">Mussoorie</a></li>
 					</ul>
 				</div>
 				<div class="mega-menu-section">
@@ -47,14 +47,14 @@
 			</div>
 		</li>
 
-		<li><a href="/stories">Stories</a>
+		<li><a href="javascript:void(0);">Stories</a>
 			<ul>
 				<li><a href="#">Nature Walks</a></li>
 				<li><a href="#">Birds watching</a></li>
 				<li><a href="#">Adventure</a></li>
 			</ul>
 		</li>
-		<li><a href="/stories">Culture</a>
+		<li><a href="javascript:void(0);">Culture</a>
 			<ul>
 				<li><a href="#">Organic Farming</a></li>
 				<li><a href="#">Kumaoni Cuisine</a></li>

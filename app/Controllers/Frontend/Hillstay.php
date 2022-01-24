@@ -31,4 +31,8 @@ class Hillstay extends BaseController
     {
         return view('Frontend/hillstay/how_it_works');
     }
+    public function privacy_policy()
+    {
+        return view('Frontend/pages/privacy_policy');
+    }
 }
