@@ -10,9 +10,10 @@
     <link rel="shortcut icon" href="<?= APP_ICON ?>">
     <title><?= APP_NAME ?></title>
     <!-- StyleSheets  -->
+    <link rel="shortcut icon" href="/public/assets/images/favicon.ico">
     <link rel="stylesheet" href="/public/dashboard/assets/css/dashlite.css?ver=2.2.0">
     <link id="skin-default" rel="stylesheet" href="/public/dashboard/assets/css/theme.css?ver=2.2.0">
-
+    <link rel="stylesheet" href="/public/assets/css/style2.css">
     <!-- page css -->
     <?php if (isset($pageCSS)) {
         echo $pageCSS;

@@ -39,6 +39,12 @@ $routes->group('/', function ($routes) {
 	$routes->match(['get', 'post'], 'email-verification', 'Frontend\Auth::verifyUserEmail', ['as' => 'verify_user_email']);
 	$routes->match(['get', 'post'], 'register', 'Frontend\Auth::register', ['as' => 'register_page']);
 	$routes->match(['get', 'post'], 'recover', 'Frontend\Auth::recover', ['as' => 'recover_page']);
+	$routes->match(['get', 'post'], 'contact-us', 'Frontend\Hillstay::contact_us', ['as' => 'contact_us']);
+	$routes->match(['get', 'post'], 'about-us', 'Frontend\Hillstay::about_us', ['as' => 'about_us']);
+	$routes->match(['get', 'post'], 'faq', 'Frontend\Hillstay::faq', ['as' => 'faq']);
+	$routes->match(['get', 'post'], 'pricing', 'Frontend\Hillstay::pricing', ['as' => 'pricing']);
+	$routes->match(['get', 'post'], 'how-it-works', 'Frontend\Hillstay::how_it_works', ['as' => 'how_it_works']);
+	$routes->match(['get', 'post'], 'privacy-policy', 'Frontend\Hillstay::privacy_policy', ['as' => 'privacy_policy']);
 
 	// $routes->post('get_city_by_state/(:num)', 'Global::get_city_by_state/$1');
 
@@ -89,6 +95,7 @@ $routes->group('/', function ($routes) {
 			$routes->match(['get', 'post'], '/', 'Frontend\Hosting\Listing::index', ['as' => 'hosting_listings_all']);
 			// $routes->match(['get', 'post'], 'edit/(:num)', 'Frontend\Hosting\Listing::edit/$1', ['as' => 'hosting_listing_edit']);
 			$routes->match(['get', 'post'], 'preview/(:num)', 'Frontend\Hosting\Listing::preview/$1', ['as' => 'hosting_listing_preview']);
+			$routes->match(['get', 'post'], 'publish-status', 'Frontend\Hosting\Listing::publish_status', ['as' => 'hosting_listing_publish_status']);
 		});
 	});
 
@@ -97,7 +104,7 @@ $routes->group('/', function ($routes) {
 		$routes->post('', 'Frontend\Listing::sendMessageToHost', ['as' => 'messageToHost']);
 		$routes->post('(:segment)/bookings', 'Frontend\Listing::getCurrentListingBookings/$1');
 	});
-
+	// frontend search module
 	$routes->group('f', function ($routes) {
 		$routes->get('/', 'Frontend\SearchController::index', ['as' => 'searchPage']);
 		$routes->get('(:segment)', 'Frontend\SearchController::index/$1', ['as' => 'searchPageList']);

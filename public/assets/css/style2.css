@@ -10671,6 +10671,28 @@ body .notification strong {
   margin: 10px 0;
   border-radius: 3px;
 }
+.diff {
+  height: 500px;
+  /* background-color: #123815; */
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  z-index: 90;
+  margin: 10px 0;
+  border-radius: 3px;
+}
+.img-box-diff {
+  background-color: #bdbdbd!important;
+  height: 500px;
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  z-index: 90;
+  margin: 10px 0;
+  border-radius: 3px;
+}
 
 .img-box-background {
   background-size: cover;
@@ -10712,6 +10734,27 @@ body .notification strong {
   text-align: center;
   width: 100%;
   transform: translate(0, -50.5%);
+}
+.diff-content {
+  position: absolute;
+  z-index: 101;
+  top: 50%;
+  margin: 0 auto;
+  text-align: center;
+  width: 100%;
+  transform: translate(0, -50.5%);
+}
+
+element.style {
+}
+.img-box-content-diff {
+    position: absolute;
+    z-index: 101;
+    top: 50%;
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+    transform: translate(0, -50.5%);
 }
 .img-box-content h4 {
   font-size: 28px;
@@ -22009,4 +22052,9 @@ label.is-valid {
 }
 .flatpickr-monthDropdown-months {
   display: inline-block;
+}
+
+.fixed_sidebar {
+  position: fixed;
+  /* margin-bottom: 500px; */
 }

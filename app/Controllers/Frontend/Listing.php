@@ -45,6 +45,12 @@ class Listing extends BaseController
 
 		if ($this->request->getMethod() == 'post') {
 
+			if ($this->request->getVar('publish')) {
+				die('test');
+				$id = $this->request->getVar('id');
+			return print_r($id);
+			}
+
 			$dataForForm = array();
 			foreach (json_decode($this->request->getPost('dataForForm')) as $key => $data) {
 				$dataForForm[$key] = $data;
@@ -440,4 +446,5 @@ class Listing extends BaseController
 			return json_encode(0);
 		}
 	}
+
 }

@@ -273,7 +273,7 @@
                 </ul>
                 <div class="clearfix"></div>
                 <h3 class="listing-desc-headline">Common Areas</h3>
-                <ul class="listing-features checkboxes margin-top-0">
+                <ul class="listing-features checkboxes margin-top-0">~
                     <li class="<?php if (!$listing['guestspace_kitchen']) echo 'no-amenity' ?>">Kitchen</li>
                     <li class="<?php if (!$listing['guestspace_laundry_washing_machine_dryer']) echo 'no-amenity' ?>">Laundry</li>
                     <li class="<?php if (!$listing['guestspace_parking']) echo 'no-amenity' ?>">Parking</li>
