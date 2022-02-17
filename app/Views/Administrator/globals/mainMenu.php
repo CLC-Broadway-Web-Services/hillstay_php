@@ -64,6 +64,7 @@
         <li class="nk-menu-item">
             <a href="<?= route_to('admin_save_listing') ?>" class="nk-menu-link"><span class="nk-menu-text">Add Listing</span></a>
         </li>
+        
         <!-- <li class="nk-menu-item">
             <a href="/administrator/blog/categories" class="nk-menu-link"><span class="nk-menu-text">Categories</span></a>
         </li>
@@ -133,6 +134,16 @@
         </li>
         <li class="nk-menu-item">
             <a href="/administrator/other/contact-submission" class="nk-menu-link"><span class="nk-menu-text">Contact Submission</span></a>
+        </li>
+    </ul>
+</li>
+<li class="nk-menu-item has-sub">
+    <a href="#" class="nk-menu-link nk-menu-toggle">
+        <span class="nk-menu-text">Users</span>
+    </a>
+    <ul class="nk-menu-sub">
+        <li class="nk-menu-item">
+            <a href="/administrator/users/users-list" class="nk-menu-link"><span class="nk-menu-text">Manage Users</span></a>
         </li>
     </ul>
 </li>

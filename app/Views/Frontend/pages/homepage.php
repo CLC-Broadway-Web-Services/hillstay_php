@@ -3,7 +3,7 @@
 <?= $this->section('content'); ?>
 
 <!-- Search Area -->
-<div class="main-search-container centered" style="background-image: url(/public/assets/images/slider_image.webp);">
+<div class="main-search-container centered" style="background-image: url(/public/assets/images/banner1hill.jpg);">
 	<div class="main-search-inner">
 
 		<div class="container">
@@ -28,7 +28,7 @@
 						<div class="main-search-input-item location">
 							<div id="datepicker-container2">
 								<!-- <input type="text" id="datepicker" placeholder="Checkin - Checkout" readonly="readonly"> -->
-								<input type="text" class="datepicker2" placeholder="Checkin - Checkout" readonly="readonly">
+								<input type="text" class="datepicker2" placeholder="Checkin - Checkout" name="date" readonly="readonly">
 							</div>
 							<a><i class="fa fa-calendar"></i></a>
 						</div>
@@ -58,7 +58,7 @@
 							</div>
 						</div>
 
-						<button type="submit" class="button" routerLink="#">Search</button>
+						<button type="submit" class="button" href="#">Search</button>
 
 					</div>
 				</form>
@@ -71,35 +71,35 @@
 
 					<div class="highlighted-categories">
 						<!-- Box -->
-						<a routerLink="listings-list-with-sidebar.html" class="highlighted-category">
+						<a href="<?= route_to('searchPage'),'?propertytype=serviced apartment' ?>" class="highlighted-category">
 							<!-- <i class="im im-icon-Home"></i> -->
 							<h4>Serviced apartments</h4>
 						</a>
 
 						<!-- Box -->
-						<a routerLink="listings-list-full-width.html" class="highlighted-category">
+						<a href="<?= route_to('searchPage'),'?propertytype=bungalows' ?>" class="highlighted-category">
 							<!-- <i class="im im-icon-Hamburger"></i> -->
 							<h4>Bungalows</h4>
 						</a>
 
 						<!-- Box -->
-						<a routerLink="listings-half-screen-map-list.html" class="highlighted-category">
+						<a href="<?= route_to('searchPage'),'?propertytype=cottages' ?>" class="highlighted-category">
 							<!-- <i class="im im-icon-Electric-Guitar"></i> -->
 							<h4>Cottages</h4>
 						</a>
 
 						<!-- Box -->
-						<a routerLink="listings-half-screen-map-list.html" class="highlighted-category">
+						<a href="<?= route_to('searchPage'),'?propertytype=camps' ?>" class="highlighted-category">
 							<!-- <i class="im im-icon-Dumbbell"></i> -->
 							<h4>Camps</h4>
 						</a>
 						<!-- Box -->
-						<a routerLink="listings-half-screen-map-list.html" class="highlighted-category">
+						<a href="<?= route_to('searchPage'),'?propertytype=villas' ?>" class="highlighted-category">
 							<!-- <i class="im im-icon-Dumbbell"></i> -->
 							<h4>Villas</h4>
 						</a>
 						<!-- Box -->
-						<a routerLink="listings-half-screen-map-list.html" class="highlighted-category">
+						<a href="<?= route_to('searchPage'),'?propertytype=resort' ?>" class="highlighted-category">
 							<!-- <i class="im im-icon-Dumbbell"></i> -->
 							<h4>Resorts</h4>
 						</a>

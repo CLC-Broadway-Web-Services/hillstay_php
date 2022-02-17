@@ -26,12 +26,12 @@
 				<div class="mega-menu-section">
 					<ul>
 						<li class="mega-menu-headline">Browse</li>
-						<li><a href="#">off-Beat</a></li>
-						<li><a href="#">Cottages</a></li>
-						<li><a href="#">Camps</a></li>
-						<li><a href="#">Villas</a></li>
-						<li><a href="#">Appartments</a></li>
-						<li><a href="#">Hostels</a></li>
+						<li><a href="<?= route_to('searchPage'),'?propertytype=off-beat' ?>">off-Beat</a></li>
+						<li><a href="<?= route_to('searchPage'),'?propertytype=cottages' ?>">Cottages</a></li>
+						<li><a href="<?= route_to('searchPage'),'?propertytype=camps' ?>">Camps</a></li>
+						<li><a href="<?= route_to('searchPage'),'?propertytype=villas' ?>">Villas</a></li>
+						<li><a href="<?= route_to('searchPage'),'?propertytype=appartments' ?>">Appartments</a></li>
+						<li><a href="<?= route_to('searchPage'),'?propertytype=hostels' ?>">Hostels</a></li>
 					</ul>
 				</div>
 				<div class="mega-menu-section">

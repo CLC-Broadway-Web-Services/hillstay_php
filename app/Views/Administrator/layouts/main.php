@@ -79,7 +79,8 @@
     <script src="/public/dashboard/assets/js/bundle.js?ver=2.2.0"></script>
     <script src="/public/dashboard/assets/js/scripts.js?ver=2.2.0"></script>
     <script src="/public/dashboard/assets/js/charts/gd-default.js?ver=2.2.0"></script>
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <?= $this->renderSection('script'); ?>
     <!-- page js -->
     <?php if (isset($pageJS)) {
         echo $pageJS;

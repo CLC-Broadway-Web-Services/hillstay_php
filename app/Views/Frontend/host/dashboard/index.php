@@ -29,7 +29,7 @@
     <div class="col-lg-3 col-md-6">
         <div class="dashboard-stat color-2">
             <div class="dashboard-stat-content">
-                <h4><?= $totalReservations ?></h4> <span>Total Reservations</span>
+                <h4></h4> <span>Total Reservations</span>
             </div>
             <div class="dashboard-stat-icon"><i class="im im-icon-Line-Chart"></i></div>
         </div>
@@ -90,53 +90,7 @@
                 // print_r($booking);
                 // echo '</pre>';
                 ?>
-                <li class="pending-booking">
-                    <div class="list-box-listing bookings">
-                        <div class="list-box-listing-img"><img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=120" alt="">
-                        </div>
-                        <div class="list-box-listing-content">
-                            <div class="inner">
-                                <h3><?= $booking['listing']['title'] ?> <span class="booking-status pending">Pending Action</span><span class="booking-status unpaid">Unpaid</span></h3>
-
-                                <div class="inner-booking-list">
-                                    <h5>Booking Date:</h5>
-                                    <ul class="booking-list">
-                                        <li class="highlighted"><?= date('d.M.Y', strtotime($booking['check_in'])) ?> to <?= date('d.M.Y', strtotime($booking['check_out'])) ?></li>
-                                    </ul>
-                                </div>
-
-                                <div class="inner-booking-list">
-                                    <h5>Booking Details:</h5>
-                                    <ul class="booking-list">
-                                        <?php if ($booking['guest_adults']) : ?>
-                                            <li class="highlighted"><?= $booking['guest_adults'] ?> Adults</li>
-                                        <?php endif; ?>
-                                        <?php if ($booking['guest_chldren']) : ?>
-                                            <li class="highlighted"><?= $booking['guest_chldren'] ?> Kids</li>
-                                        <?php endif; ?>
-                                        <?php if ($booking['guest_infants']) : ?>
-                                            <li class="highlighted"><?= $booking['guest_infants'] ?> Infants</li>
-                                        <?php endif; ?>
-                                    </ul>
-                                </div>
-
-                                <div class="inner-booking-list">
-                                    <h5>Price:</h5>
-                                    <ul class="booking-list">
-                                        <li class="highlighted"><?= number_to_currency($booking['price_total'], 'INR') ?></li>
-                                    </ul>
-                                </div>
-
-                                <a href="<?= route_to('hosting_dashboard_reservations') ?>" class="rate-review">View All Requests</a>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="buttons-to-right">
-                        <a href="<?= route_to('hosting_dashboard_reservations_reject') ?>" class="button gray reject"><i class="sl sl-icon-close"></i> Reject</a>
-                        <a href="<?= route_to('hosting_dashboard_reservations_approve') ?>" class="button gray approve"><i class="sl sl-icon-check"></i> Approve</a>
-                    </div>
-                </li>
+              
 
             </ul>
         </div>

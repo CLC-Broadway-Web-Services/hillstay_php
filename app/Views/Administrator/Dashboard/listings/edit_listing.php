@@ -1,4 +1,4 @@
-<?= $this->extend('Administrator/layouts/main') ?>
+<?= $this->extend('Administrator/layouts/main_edit') ?>
 
 <?= $this->section('content') ?>
 <!-- Page Container START -->

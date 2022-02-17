@@ -4,10 +4,16 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
 use App\Models\Admin\ContactsModel;
+use App\Models\Admin\ContactusModel;
 use App\Models\Admin\TestimonialsModel;
 
 class Others extends BaseController
 {
+    public function __construct()
+    {
+
+        $this->session = session();
+    }
     public function subscribers()
     {
         $data = array();
@@ -21,11 +27,18 @@ class Others extends BaseController
     }
     public function contactSubmission()
     {
+
+
+
         $data = array();
-        $contactDB = new ContactsModel();
-        $data['contacts'] = $contactDB->orderBy('id', 'desc')->findAll();
+        $contactDB = new ContactusModel();
+
+
+
+        $data['contacts'] = $contactDB->orderBy('id', 'DESC')->findAll();
 
         // return print_r($data);
+
 
         // $admin = session()->get('admin');
         // $data['admin'] =  $admin;
@@ -34,7 +47,23 @@ class Others extends BaseController
 
         return view('Administrator/Dashboard/others/contacts-all', $data);
     }
-    public function testimonials($testimonial_id = 0) {
+    public function contactSubmissionDelete()
+    {
+        $contactDB = new ContactusModel();
+        // $id = $this->request->getVar($id);
+
+
+        // $del = $contactDB->where('id', $id)->delete();
+        // if ($del) {
+        //     // return print_r('test');
+        //     $this->session->setFlashdata("success", "deleted");
+        //     return redirect()->route('contactSubmission');
+
+        // }
+
+    }
+    public function testimonials($testimonial_id = 0)
+    {
         $data = array();
 
         $testimonialDB = new TestimonialsModel();
@@ -118,6 +147,18 @@ class Others extends BaseController
             );
             session()->setFlashdata($message);
             return redirect()->to('/administrator/other/testimonials');
+        }
+    }
+    public function contact_delete()
+    {
+      
+        if ($this->request->getMethod() == 'post') {
+         
+            if ($this->request->getVar('delete')) {
+                $contactDB = new ContactusModel();
+                $getId = $this->request->getVar('id');
+                return $contactDB->delete($getId);
+            }
         }
     }
 }

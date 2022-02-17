@@ -11,7 +11,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="nk-block-content text-center text-lg-left">
-                                        <p class="text-soft">&copy; <?= date('Y') ?> Legalist. All Rights Reserved.</p>
+                                        <p class="text-soft">&copy; <?= date('Y') ?> Hillstay. All Rights Reserved.</p>
                                     </div>
                                 </div>
                             </div>

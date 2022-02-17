@@ -57,7 +57,6 @@ if (isset($type)) {
 </head>
 
 <body>
-
 	<!-- Wrapper -->
 	<div id="wrapper">
 
@@ -82,10 +81,33 @@ if (isset($type)) {
 
 	<?= view('Frontend/globals/scripts'); ?>
 
-    <?= $this->renderSection('footerScripts'); ?>
+	<?= $this->renderSection('footerScripts'); ?>
+	<script src="/public/custom/assets/js/homepage.js"></script>
+	<script>
+		if (isMobile.iOS() || isMobile.any()) {
+			if (document.getElementById('moreFilter')) {
+				document.getElementById('moreFilter').setAttribute('href', '/login');
+			}
+			if (document.getElementById('registerButton')) {
+				document.getElementById('registerButton').setAttribute('href', '/register');
+			}
+		} else {
+			if (document.getElementById('moreFilter')) {
+				document.getElementById('moreFilter').setAttribute('href', '#filter-in-dialog');
+			}
+			if (document.getElementById('registerButton')) {
+				document.getElementById('registerButton').setAttribute('href', '#filter-in-dialog');
+			}
+		}
+	</script>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    <?php if (session()->getFlashdata("success")) { ?>
+        Swal.fire('Data saved successfully')
 
+    <?php } ?>
 
-
+</script>
 </body>
 
 </html>

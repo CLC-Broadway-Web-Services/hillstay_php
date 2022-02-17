@@ -190,6 +190,24 @@
                     </a>
                 </li>
             <?php endif ?>
+            <?php if ($uriSegments[2] == 'listing') : ?>
+                <li class="nk-menu-heading">
+                    <h6 class="overline-title text-primary-alt">Listings</h6>
+                </li>
+
+                <li class="nk-menu-item">
+                    <a href="<?= route_to('listing_view') ?>" class="nk-menu-link">
+                        <span class="nk-menu-icon"><em class="icon ni ni-dashlite"></em></span>
+                        <span class="nk-menu-text">Listing View</span>
+                    </a>
+                </li>
+                <li class="nk-menu-item">
+                    <a href="<?= route_to('admin_all_listing') ?>" class="nk-menu-link">
+                        <span class="nk-menu-icon"><em class="icon ni ni-growth"></em></span>
+                        <span class="nk-menu-text">Listing List</span>
+                    </a>
+                </li>
+            <?php endif ?>
         </ul>
 
     </div>

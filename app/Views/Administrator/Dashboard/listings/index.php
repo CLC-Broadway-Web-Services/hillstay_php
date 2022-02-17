@@ -8,7 +8,7 @@
         <div class="nk-block nk-block-lg">
             <div class="nk-block-head">
                 <div class="nk-block-head-content">
-                    <h4 class="nk-block-title">Projects</h4>
+                    <h4 class="nk-block-title">Listings</h4>
                     <?php if (isset($sessionData['serviceStatusMessage'])) : ?>
                         <div class="alert alert-icon alert-danger" role="alert">
                             <em class="icon ni ni-alert-circle"></em>

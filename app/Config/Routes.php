@@ -126,6 +126,7 @@ $routes->group('administrator', function ($routes) {
 	// ADMIN LISTING ROUTES
 	$routes->group('listing', ['filter' => 'adminauth'], function ($routes) {
 		$routes->match(['get', 'post'], '/', 'Admin\ListingController::index', ['as' => 'admin_all_listing']);
+		$routes->match(['get', 'post'], 'view-listing', 'Admin\ListingController::listing_view', ['as' => 'listing_view']);
 		$routes->match(['get', 'post'], 'add', 'Admin\ListingController::save', ['as' => 'admin_save_listing']);
 		$routes->match(['get', 'post'], 'edit/(:num)', 'Admin\ListingController::save/$1', ['as' => 'admin_update_listing']);
 		$routes->match(['get', 'post'], 'show/(:num)', 'Admin\ListingController::show/$1', ['as' => 'admin_view_listing']);
@@ -220,13 +221,21 @@ $routes->group('administrator', function ($routes) {
 	});
 
 	// ADMIN OTHERS ROUTES
+	$routes->match(['get', 'post'], 'contact-delete', 'Admin\Others::contact_delete', ['as' => 'contact_delete']);
+
 	$routes->group('other', ['filter' => 'adminauth'], function ($routes) {
 		$routes->match(['get', 'post'], 'subscribers', 'Admin\Others::subscribers');
-		$routes->match(['get', 'post'], 'contact-submission', 'Admin\Others::contactSubmission');
+		$routes->match(['get', 'post'], 'contact-submission', 'Admin\Others::contactSubmission', ['as' => 'contactSubmission']);
+		$routes->match(['get', 'post'], 'contact/(:num)', 'Admin\Others::contactSubmissionDelete/$1', ['as' => 'contactSubmissionDelete']);
 
 		$routes->match(['get', 'post'], 'testimonials', 'Admin\Others::testimonials');
 		$routes->match(['get', 'post'], 'testimonials/(:num)', 'Admin\Others::testimonials/$1');
 		$routes->match(['get', 'post'], 'testimonials/delete/(:num)', 'Admin\Others::testimonialsDelete/$1');
+	});
+
+	$routes->group('users', function ($routes) {
+		$routes->match(['get', 'post'], 'users-list', 'Admin\UsersController::user_list', ['as' => 'user_list']);
+		$routes->match(['get', 'post'], 'user-view/(:num)', 'Admin\UsersController::user_view/$1', ['as' => 'user_view']);
 	});
 });
 

@@ -3,12 +3,14 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
+use App\Models\Admin\BookingsModel;
 use App\Models\Admin\CitiesModel;
 use App\Models\Admin\ListingGalleryModel;
 use App\Models\Admin\ListingModel;
 use App\Models\Admin\ListingSleepingArrangementModel;
 use App\Models\Admin\ListingSteps;
 use App\Models\Admin\StatesModel;
+use App\Models\Admin\UserModel;
 
 class ListingController extends BaseController
 {
@@ -20,18 +22,23 @@ class ListingController extends BaseController
 	private $listing_steps_m;
 	protected $states_m;
 	protected $cities_m;
+	protected $user_m;
+	protected $bookingDb;
+
 
 	public function __construct()
 	{
 		$this->data = array();
 		$this->admin = session()->get('admin');
-	
+
 		$this->listing_m = new ListingModel();
 		$this->listing_sleep_m = new ListingSleepingArrangementModel();
 		$this->listing_gallery_m = new ListingGalleryModel();
 		$this->listing_steps_m = new ListingSteps();
 		$this->states_m = new StatesModel();
 		$this->cities_m = new CitiesModel();
+		$this->user_m = new UserModel();
+		$this->bookingDb = new BookingsModel();
 		helper('file');
 	}
 	public function index()
@@ -49,6 +56,17 @@ class ListingController extends BaseController
 	// {
 	// 	return view('Administrator/Dashboard/listings/edit_listing');
 	// }
+	public function listing_view()
+	{
+
+		
+		
+		$this->data['totalListing'] = $this->listing_m->countAllResults();
+		$this->data['activeListing'] = $this->listing_m->where(['status' => 1, 'published' => 1])->countAllResults();
+
+		// return print_r($this->data);
+		return view('Administrator/Dashboard/listings/listing_view', $this->data);
+	}
 	public function save($listing_id = null)
 	{
 		// $additionalRules = ["rule no 1", "rule no 2", "rule no 3", "rule no 4"];
@@ -638,6 +656,22 @@ class ListingController extends BaseController
 
 	public function show($listing_id = null)
 	{
+
+		$this->data['pendingBooking'] = $this->bookingDb->where(['listing_id' => $listing_id, 'status_name' => 'requested'])->countAllResults();
+		$this->data['totalBooking'] = $this->bookingDb->where('listing_id', $listing_id)->countAllResults();
+		$this->data['bookingReject'] = $this->bookingDb->where(['listing_id' => $listing_id, 'status_name' => 'cancelled'])->countAllResults();
+		$this->data['bookingAccepted'] = $this->bookingDb->where(['listing_id' => $listing_id, 'status_name' => 'completed'])->countAllResults();
+		$this->data['totalRevenue'] = $this->bookingDb->where(['listing_id'=> $listing_id,'payment_status'=> 1,'transaction_status'=> 'success','status_name'=> 'completed'])->select('sum(price_total) as total')->first();
+
+
+		$listingViewdata = $this->listing_m->orderBy('listing_id', 'DESC')->where('listing_id', $listing_id)->first();
+		$userId = $listingViewdata['uid'];
+		$this->data['listingView'] = $listingViewdata;
+		$this->data['name'] = $this->user_m->select(['firstName', 'lastname','uid','lastLogin'])->where('uid', $userId)->first();
+
+
+		// return print_r($this->data);
+		return view('Administrator/Dashboard/listings/view-listing', $this->data);
 	}
 	public function activate($listing_id = null)
 	{
